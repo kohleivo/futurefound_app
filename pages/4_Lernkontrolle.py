@@ -1,25 +1,25 @@
 import streamlit as st
 
+# --- Stil für dunklen Hintergrund, Trennlinie und Button ---
 st.markdown("""
     <style>
-    /* Minimalistischer, professioneller Hintergrund */
     .stApp {
-        background: linear-gradient(135deg, #e9ecef 0%, #cfd8dc 100%) !important;
+        background: #23272f !important;
     }
-    /* Überschrift */
     .main-title {
         font-size: 2.1em;
         font-weight: bold;
-        color: #222831;
+        color: #fff;
         margin-bottom: 0.2em;
         letter-spacing: 1px;
+        text-align: center;
     }
     .subtitle {
-        color: #393e46;
+        color: #d9e0e7;
         font-size: 1.18em;
         margin-bottom: 1.4em;
+        text-align: center;
     }
-    /* Weiße Trennlinie wie in page3 */
     .white-divider {
         height: 2.5px;
         width: 100%;
@@ -29,9 +29,13 @@ st.markdown("""
         border-radius: 2px;
         box-shadow: 0 1px 4px #0001;
     }
-    /* Button clean und dezent */
+    .emoji-question {
+        font-size: 2.2em;
+        text-align: center;
+        margin-bottom: 0.5em;
+    }
     .stButton > button {
-        background: #007bff;
+        background: #393e46;
         color: #fff;
         border: none;
         border-radius: 8px;
@@ -40,28 +44,26 @@ st.markdown("""
         padding: 0.5em 2em;
         margin-top: 1.1em;
         margin-bottom: 0.6em;
-        box-shadow: 0 2px 8px #007bff22;
+        box-shadow: 0 2px 8px #22283133;
         transition: 0.18s;
     }
     .stButton > button:hover {
-        background: #0056b3;
+        background: #00adb5;
         color: #fff;
         transform: translateY(-2px) scale(1.03);
-        box-shadow: 0 4px 16px #007bff33;
+        box-shadow: 0 4px 16px #00adb533;
     }
-    /* Radio-Button Text */
     .stRadio label {
         font-size: 1.09em !important;
-        color: #222831 !important;
+        color: #e9ecef !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="main-title">🎯 Lernkontrolle, Kapitel 1</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Was beschreibt den Kern des Lean-Startup-Ansatzes?</div>', unsafe_allow_html=True)
-
-# Weiße Trennlinie wie in page3
 st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="emoji-question">🤔</div>', unsafe_allow_html=True)
 
 antworten = [
     "Mit möglichst wenig Geld ein Unternehmen gründen.",
