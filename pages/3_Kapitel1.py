@@ -35,7 +35,7 @@ st.markdown("""
         font-size: 1.1em;
         font-weight: bold;
         margin-bottom: 0.2em;
-        color: #222831;
+        color: #fff !important;
     }
     .tile-icon {
         font-size: 1.6em;
