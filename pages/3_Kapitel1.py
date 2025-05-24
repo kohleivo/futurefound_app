@@ -14,22 +14,46 @@ tiles = [
     {"title": "Nur was für Anfänger", "info": "Auch Konzerne nutzen es für neue Projekte", "icon": "🏢"}
 ]
 
-if "selected_tile" not in st.session_state:
-    st.session_state["selected_tile"] = None
+# Session-State für jeden Button initialisieren
+for idx in range(len(tiles)):
+    key = f"tile_{idx}_clicked"
+    if key not in st.session_state:
+        st.session_state[key] = False
 
+cols = st.columns(2)
 for idx, tile in enumerate(tiles):
-    if st.button(f"{tile['icon']} {tile['title']}", key=tile['title']):
-        st.session_state["selected_tile"] = idx
-    if st.session_state["selected_tile"] == idx:
-        st.info(tile["info"])
+    with cols[idx % 2]:
+        key = f"tile_{idx}_clicked"
+        if not st.session_state[key]:
+            if st.button(f"{tile['icon']} {tile['title']}", key=f"button_{idx}"):
+                st.session_state[key] = True
+        if st.session_state[key]:
+            st.info(tile["info"])
 
-# Buttons vor und zurück
+# Buttons vor und zurück (links/rechts)
+st.markdown("""
+    <style>
+    .button-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 st.markdown('<div class="button-row">', unsafe_allow_html=True)
 col1, col2 = st.columns([1, 1])
 with col1:
     if st.button("Zurück", key="zurueck"):
-        st.switch_page("streamlit_app.py")
+        st.switch_page("pages/2_Mission.py")
 with col2:
     if st.button("Weiter", key="weiter"):
-        st.switch_page("pages/3_Kapitel1.py")
+        st.switch_page("pages/4_Lernkontrolle.py")
 st.markdown('</div>', unsafe_allow_html=True)
