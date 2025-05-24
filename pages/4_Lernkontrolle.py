@@ -9,7 +9,7 @@ antworten = [
     "Nur für Tech-Startups geeignet.",
     "Einen festen Plan verfolgen."
 ]
-richtige_antwort = 1
+richtige_antwort = 1  # Index der richtigen Antwort
 
 if "radio_key" not in st.session_state:
     st.session_state["radio_key"] = 0
@@ -53,11 +53,8 @@ if st.session_state["abgegeben"]:
             st.switch_page("pages/5_NaechstesKapitel.py")
     else:
         st.error("❌ Fast! Denk nochmal an das Build-Measure-Learn-Prinzip.")
-        if st.session_state["reset_count"] == 0:
-            if st.button("Wiederholen"):
-                reset_lernkontrolle()
-                st.session_state["reset_count"] = 1  # Setze auf 1, damit beim nächsten Klick zurückgesetzt wird
-            st.info("🔄 Bereit für einen Neustart? Drücke noch einmal auf 'Wiederholen', um die Frage komplett zurückzusetzen!")
-        elif st.session_state["reset_count"] == 1:
-            if st.button("Wiederholen"):
-                reset_lernkontrolle()
+        if st.button("Wiederholen"):
+            reset_lernkontrolle()
+        if st.session_state["reset_count"] == 1:
+            st.info("🔄 Super! Noch ein Klick auf 'Wiederholen' und du kannst die Frage neu beantworten.")
+
