@@ -69,19 +69,21 @@ st.markdown("""
 
 for idx, tile in enumerate(tiles):
     key = f"tile_{idx}_clicked"
-    st.markdown('<div class="tile-container">', unsafe_allow_html=True)
-    st.markdown(
-        f'<div class="tile-header">'
-        f'<span class="tile-icon">{tile["icon"]}</span>'
-        f'{tile["title"]}'
-        f'</div>',
-        unsafe_allow_html=True
-    )
-    if st.button("Mehr erfahren", key=f"button_{idx}", help="Zeigt mehr Informationen an"):
-        st.session_state[key] = True
-    if st.session_state[key]:
-        st.markdown(f'<div class="tile-info">{tile["info"]}</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+    # ALLES im weißen Block!
+    with st.container():
+        st.markdown('<div class="tile-container">', unsafe_allow_html=True)
+        st.markdown(
+            f'<div class="tile-header">'
+            f'<span class="tile-icon">{tile["icon"]}</span>'
+            f'{tile["title"]}'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+        if st.button("Mehr erfahren", key=f"button_{idx}", help="Zeigt mehr Informationen an"):
+            st.session_state[key] = True
+        if st.session_state[key]:
+            st.markdown(f'<div class="tile-info">{tile["info"]}</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # Navigation: Session-State für diese Seite zurücksetzen beim Seitenwechsel
 col1, col2 = st.columns([1, 1])
