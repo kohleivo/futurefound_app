@@ -30,7 +30,7 @@ def abgabe_callback():
 
 def reset_lernkontrolle():
     st.session_state["reset_count"] += 1
-    if st.session_state["reset_count"] >= 2:
+    if st.session_state["reset_count"] == 2:
         st.session_state["abgegeben"] = False
         st.session_state["feedback"] = None
         st.session_state["radio_key"] += 1
@@ -56,8 +56,8 @@ if st.session_state["abgegeben"]:
         if st.session_state["reset_count"] == 0:
             if st.button("Wiederholen"):
                 reset_lernkontrolle()
+                st.session_state["reset_count"] = 1  # Setze auf 1, damit beim nächsten Klick zurückgesetzt wird
             st.info("🔄 Bereit für einen Neustart? Drücke noch einmal auf 'Wiederholen', um die Frage komplett zurückzusetzen!")
         elif st.session_state["reset_count"] == 1:
-            st.info("🚀 Super! Jetzt noch ein Klick auf 'Wiederholen' und du kannst neu starten!")
             if st.button("Wiederholen"):
                 reset_lernkontrolle()
