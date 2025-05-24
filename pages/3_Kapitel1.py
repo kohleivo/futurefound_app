@@ -2,7 +2,6 @@ import streamlit as st
 
 # Session-State für Reset beim Seitenaufruf
 if "kapitel1_visited" not in st.session_state:
-    # Beim ersten Laden: alle Infotexte ausblenden
     for idx in range(4):
         st.session_state[f"tile_{idx}_clicked"] = False
     st.session_state["kapitel1_visited"] = True
@@ -23,13 +22,14 @@ tiles = [
 
 st.markdown("""
     <style>
-    .tile-box {
-        border: 2px solid #00ADB5;
-        border-radius: 12px;
-        padding: 1.2em 1em 1em 1em;
-        margin-bottom: 1.3em;
-        background: #f8f9fa;
-        box-shadow: 0 2px 8px #0001;
+    .white-divider {
+        height: 2px;
+        width: 100%;
+        background: #fff;
+        margin: 28px 0 18px 0;
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 1px 4px #0001;
     }
     .tile-title {
         font-size: 1.1em;
@@ -46,8 +46,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 for idx, tile in enumerate(tiles):
+    if idx > 0:
+        st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
     key = f"tile_{idx}_clicked"
-    st.markdown('<div class="tile-box">', unsafe_allow_html=True)
     st.markdown(
         f'<span class="tile-icon">{tile["icon"]}</span>'
         f'<span class="tile-title">{tile["title"]}</span>',
@@ -57,20 +58,17 @@ for idx, tile in enumerate(tiles):
         st.session_state[key] = True
     if st.session_state[key]:
         st.info(tile["info"])
-    st.markdown('</div>', unsafe_allow_html=True)
 
 # Navigation: Session-State für diese Seite zurücksetzen beim Seitenwechsel
 col1, col2 = st.columns([1, 1])
 with col1:
     if st.button("Zurück", key="zurueck"):
-        # Reset aller Infotexte beim Verlassen der Seite
         for idx in range(4):
             st.session_state[f"tile_{idx}_clicked"] = False
         st.session_state["kapitel1_visited"] = False
         st.switch_page("pages/2_Mission.py")
 with col2:
     if st.button("Weiter", key="weiter"):
-        # Reset aller Infotexte beim Verlassen der Seite
         for idx in range(4):
             st.session_state[f"tile_{idx}_clicked"] = False
         st.session_state["kapitel1_visited"] = False
