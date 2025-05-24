@@ -53,7 +53,7 @@ st.markdown("**Video 2:**")
 
 # Video zentriert anzeigen
 st.markdown('<div class="video-container">', unsafe_allow_html=True)
-with open("video2.mp4", "rb") as video_file:
+with open("video 2.mp4", "rb") as video_file:
     st.video(video_file.read())
 st.markdown('</div>', unsafe_allow_html=True)
 
