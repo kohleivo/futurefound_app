@@ -11,47 +11,44 @@ antworten = [
 ]
 richtige_antwort = 1  # Index der richtigen Antwort
 
-# Initialisierung des Session State
-if "lernkontrolle_selected" not in st.session_state:
-    st.session_state["lernkontrolle_selected"] = None
-if "lernkontrolle_feedback" not in st.session_state:
-    st.session_state["lernkontrolle_feedback"] = None
-if "lernkontrolle_abgegeben" not in st.session_state:
-    st.session_state["lernkontrolle_abgegeben"] = False
+# Session-State initialisieren
+if "abgegeben" not in st.session_state:
+    st.session_state["abgegeben"] = False
+if "feedback" not in st.session_state:
+    st.session_state["feedback"] = None
+if "auswahl" not in st.session_state:
+    st.session_state["auswahl"] = antworten[0]  # Default-Auswahl
 
-# Auswahlfeld
-selected = st.radio(
+def reset_lernkontrolle():
+    st.session_state["abgegeben"] = False
+    st.session_state["feedback"] = None
+    st.session_state["auswahl"] = antworten[0]
+
+# Radio-Button für die Auswahl
+auswahl = st.radio(
     "Wähle die richtige Antwort:",
     antworten,
-    index=st.session_state["lernkontrolle_selected"] if st.session_state["lernkontrolle_selected"] is not None else 0,
-    key="lernkontrolle_radio"
+    key="auswahl",
+    disabled=st.session_state["abgegeben"]
 )
 
-# Abgabe-Button nur anzeigen, wenn noch nicht abgegeben
-if not st.session_state["lernkontrolle_abgegeben"]:
+# "Abgabe"-Button nur anzeigen, wenn noch nicht abgegeben wurde
+if not st.session_state["abgegeben"]:
     if st.button("Abgabe"):
-        st.session_state["lernkontrolle_selected"] = antworten.index(selected)
-        st.session_state["lernkontrolle_abgegeben"] = True
-        if st.session_state["lernkontrolle_selected"] == richtige_antwort:
-            st.session_state["lernkontrolle_feedback"] = "richtig"
+        st.session_state["abgegeben"] = True
+        if antworten.index(st.session_state["auswahl"]) == richtige_antwort:
+            st.session_state["feedback"] = "richtig"
         else:
-            st.session_state["lernkontrolle_feedback"] = "falsch"
+            st.session_state["feedback"] = "falsch"
 
-# Feedback und Navigation
-if st.session_state["lernkontrolle_abgegeben"]:
-    if st.session_state["lernkontrolle_feedback"] == "richtig":
+# Feedback und "Wiederholen"/"Weiter"-Button
+if st.session_state["abgegeben"]:
+    if st.session_state["feedback"] == "richtig":
         st.success("✅ Richtig! Lean Startup bedeutet, schnell zu lernen.")
         if st.button("Weiter"):
-            # Hier kannst du auf die nächste Seite springen
+            # Hier ggf. auf die nächste Seite springen
             st.switch_page("pages/5_NaechstesKapitel.py")
     else:
         st.error("❌ Fast! Denk nochmal an das Build-Measure-Learn-Prinzip.")
-        # Wiederholen-Button anzeigen, Abgabe-Button ist jetzt ausgeblendet
         if st.button("Wiederholen"):
-            # Reset aller relevanten States OHNE experimental_rerun
-            st.session_state["lernkontrolle_selected"] = None
-            st.session_state["lernkontrolle_feedback"] = None
-            st.session_state["lernkontrolle_abgegeben"] = False
-            # Auch den Radio-Button zurücksetzen
-            st.session_state["lernkontrolle_radio"] = antworten[0]
-            # Die Seite wird automatisch neu gerendert, kein rerun nötig
+            reset_lernkontrolle()
