@@ -48,8 +48,10 @@ if st.session_state["lernkontrolle_abgegeben"]:
         st.error("❌ Fast! Denk nochmal an das Build-Measure-Learn-Prinzip.")
         # Wiederholen-Button anzeigen, Abgabe-Button ist jetzt ausgeblendet
         if st.button("Wiederholen"):
+            # Reset aller relevanten States OHNE experimental_rerun
             st.session_state["lernkontrolle_selected"] = None
             st.session_state["lernkontrolle_feedback"] = None
             st.session_state["lernkontrolle_abgegeben"] = False
-            # Optional: Radio-Button zurücksetzen
-            st.experimental_rerun()
+            # Auch den Radio-Button zurücksetzen
+            st.session_state["lernkontrolle_radio"] = antworten[0]
+            # Die Seite wird automatisch neu gerendert, kein rerun nötig
