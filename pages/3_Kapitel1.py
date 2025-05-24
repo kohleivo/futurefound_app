@@ -7,7 +7,7 @@ if "kapitel1_visited" not in st.session_state:
     st.session_state["kapitel1_visited"] = True
 
 st.title("Was ist eigentlich «Lean Startup»?")
-st.header("Lean Startup ist NICHT…")
+st.header("Du verstehst, was Lean Startup bedeutet – und was es nicht ist.")
 
 # Video zentriert anzeigen
 st.markdown('<div class="video-container">', unsafe_allow_html=True)
@@ -15,7 +15,7 @@ with open("video 2.mp4", "rb") as video_file:
     st.video(video_file.read())
 st.markdown('</div>', unsafe_allow_html=True)
 
-st.subheader("Lernziel 1: Du verstehst, was Lean Startup bedeutet – und was es nicht ist.")
+st.subheader("Lean Startup ist NICHT…")
 
 tiles = [
     {"title": "Ein Startup ohne Geld", "info": "Lean hat nichts mit wenig Geld zu tun, sondern mit schnellem Lernen.", "icon": "💸"},
