@@ -11,24 +11,24 @@ antworten = [
 ]
 richtige_antwort = 1  # Index der richtigen Antwort
 
-# Session-State initialisieren
+# Ein dynamischer Key für das Radio-Widget, damit es bei Reset neu gebaut wird
+if "radio_key" not in st.session_state:
+    st.session_state["radio_key"] = 0
 if "abgegeben" not in st.session_state:
     st.session_state["abgegeben"] = False
 if "feedback" not in st.session_state:
     st.session_state["feedback"] = None
-if "auswahl" not in st.session_state:
-    st.session_state["auswahl"] = antworten[0]  # Default-Auswahl
 
 def reset_lernkontrolle():
     st.session_state["abgegeben"] = False
     st.session_state["feedback"] = None
-    st.session_state["auswahl"] = antworten[0]
+    st.session_state["radio_key"] += 1  # erzwingt ein neues Widget beim nächsten Rendern
 
-# Radio-Button für die Auswahl
+# Radio-Button für die Auswahl, wird nach Reset neu aufgebaut
 auswahl = st.radio(
     "Wähle die richtige Antwort:",
     antworten,
-    key="auswahl",
+    key=f"lernkontrolle_radio_{st.session_state['radio_key']}",
     disabled=st.session_state["abgegeben"]
 )
 
@@ -36,7 +36,7 @@ auswahl = st.radio(
 if not st.session_state["abgegeben"]:
     if st.button("Abgabe"):
         st.session_state["abgegeben"] = True
-        if antworten.index(st.session_state["auswahl"]) == richtige_antwort:
+        if antworten.index(auswahl) == richtige_antwort:
             st.session_state["feedback"] = "richtig"
         else:
             st.session_state["feedback"] = "falsch"
