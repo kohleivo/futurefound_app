@@ -17,8 +17,8 @@ if "abgegeben" not in st.session_state:
     st.session_state["abgegeben"] = False
 if "feedback" not in st.session_state:
     st.session_state["feedback"] = None
-if "reset_count" not in st.session_state:
-    st.session_state["reset_count"] = 0
+if "reset_pending" not in st.session_state:
+    st.session_state["reset_pending"] = False
 
 def abgabe_callback():
     st.session_state["abgegeben"] = True
@@ -29,12 +29,14 @@ def abgabe_callback():
         st.session_state["feedback"] = "falsch"
 
 def reset_lernkontrolle():
-    st.session_state["reset_count"] += 1
-    if st.session_state["reset_count"] == 2:
-        st.session_state["abgegeben"] = False
-        st.session_state["feedback"] = None
-        st.session_state["radio_key"] += 1
-        st.session_state["reset_count"] = 0
+    st.session_state["reset_pending"] = True
+
+# Sofortiger Reset beim nächsten Rendern nach dem ersten Klick auf "Wiederholen"
+if st.session_state["reset_pending"]:
+    st.session_state["abgegeben"] = False
+    st.session_state["feedback"] = None
+    st.session_state["radio_key"] += 1
+    st.session_state["reset_pending"] = False
 
 auswahl = st.radio(
     "Wähle die richtige Antwort:",
@@ -55,6 +57,4 @@ if st.session_state["abgegeben"]:
         st.error("❌ Fast! Denk nochmal an das Build-Measure-Learn-Prinzip.")
         if st.button("Wiederholen"):
             reset_lernkontrolle()
-        if st.session_state["reset_count"] == 1:
-            st.info("🔄 Super! Noch ein Klick auf 'Wiederholen' und du kannst die Frage neu beantworten.")
-
+            st.info("🔄 Gleich geht's weiter! Die Frage wird jetzt neu geladen ...")
