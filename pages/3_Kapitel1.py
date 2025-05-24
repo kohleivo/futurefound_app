@@ -6,8 +6,8 @@ if "kapitel1_visited" not in st.session_state:
         st.session_state[f"tile_{idx}_clicked"] = False
     st.session_state["kapitel1_visited"] = True
 
-st.title("Kapitel 1")
-st.header("Einführung in Kapitel 1")
+st.title("Was ist eigentlich «Lean Startup»?")
+st.header("Lean Startup ist NICHT…")
 
 # Video zentriert anzeigen
 st.markdown('<div class="video-container">', unsafe_allow_html=True)
