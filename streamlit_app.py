@@ -8,3 +8,5 @@ st.write("""
 Du bist Business Consultant, Spezialistin für smarte Startups (also, fast… jedenfalls behauptet das dein LinkedIn-Profil).
 Eines Tages bekommst du eine Nachricht vom kleinen, innovativen Startup FutureFound, das kurz vor dem Aus steht.
 """)
+if st.button("Weiter"):
+    st.switch_page("pages/2_Mission.py")
