@@ -7,7 +7,7 @@ if "mission_gestartet" not in st.session_state:
 st.title("Mission")
 st.write("Video 1:")
 
-video_file = open("video2.mp4", "rb")
+video_file = open("video 2.mp4", "rb")
 video_bytes = video_file.read()
 st.video(video_bytes)
 
