@@ -33,13 +33,16 @@ auswahl = st.radio(
 )
 
 # "Abgabe"-Button nur anzeigen, wenn noch nicht abgegeben wurde
+abgabe_clicked = False
 if not st.session_state["abgegeben"]:
-    if st.button("Abgabe"):
+    abgabe_clicked = st.button("Abgabe")
+    if abgabe_clicked:
         st.session_state["abgegeben"] = True
         if antworten.index(auswahl) == richtige_antwort:
             st.session_state["feedback"] = "richtig"
         else:
             st.session_state["feedback"] = "falsch"
+        st.experimental_rerun()  # Seite sofort neu laden, damit der Button verschwindet
 
 # Feedback und "Wiederholen"/"Weiter"-Button
 if st.session_state["abgegeben"]:
@@ -52,3 +55,4 @@ if st.session_state["abgegeben"]:
         st.error("❌ Fast! Denk nochmal an das Build-Measure-Learn-Prinzip.")
         if st.button("Wiederholen"):
             reset_lernkontrolle()
+            st.experimental_rerun()  # Seite sofort neu laden
