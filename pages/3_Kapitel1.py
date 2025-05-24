@@ -22,3 +22,14 @@ for idx, tile in enumerate(tiles):
         st.session_state["selected_tile"] = idx
     if st.session_state["selected_tile"] == idx:
         st.info(tile["info"])
+
+# Buttons vor und zurück
+st.markdown('<div class="button-row">', unsafe_allow_html=True)
+col1, col2 = st.columns([1, 1])
+with col1:
+    if st.button("Zurück", key="zurueck"):
+        st.switch_page("streamlit_app.py")
+with col2:
+    if st.button("Weiter", key="weiter"):
+        st.switch_page("pages/3_Kapitel1.py")
+st.markdown('</div>', unsafe_allow_html=True)
