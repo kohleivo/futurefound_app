@@ -1,20 +1,29 @@
 import streamlit as st
 
+# Zustand initialisieren
+if "mission_gestartet" not in st.session_state:
+    st.session_state["mission_gestartet"] = False
+
 st.title("Mission")
 st.write("Video 1:")
 
-# Beispiel: Lokale Videodatei oder YouTube-Link
-# Für YouTube-Link z.B.: st.video("https://www.youtube.com/watch?v=dein_video")
-st.video("https://www.youtube.com/watch?v=dein_video")  # Ersetze den Link durch dein Video
+# Beispielvideo (ersetzen durch eigenen Link oder Datei)
+st.video("https://www.youtube.com/watch?v=dein_video")
 
-if st.button("Mission Starten"):
-    st.success("Mission gestartet! Navigiere weiter zum nächsten Kapitel.") 
+# Button-Callback-Funktion
+def mission_starten():
+    st.session_state["mission_gestartet"] = True
 
-col1, col2 = st.columns([1,1])
+# "Mission Starten"-Button, nur anzeigen, wenn Mission noch nicht gestartet
+if not st.session_state["mission_gestartet"]:
+    st.button("Mission Starten", on_click=mission_starten)
 
-with col1:
-    if st.button("Zurück"):
-        st.switch_page("streamlit_app.py")
-with col2:
-    if st.button("Weiter"):
-        st.switch_page("pages/3_Kapitel1.py")
+# "Weiter" und "Zurück"-Buttons nur anzeigen, wenn Mission gestartet wurde
+if st.session_state["mission_gestartet"]:
+    col1, col2 = st.columns([1,1])
+    with col1:
+        if st.button("Zurück"):
+            st.switch_page("streamlit_app.py")
+    with col2:
+        if st.button("Weiter"):
+            st.switch_page("pages/3_Kapitel1.py")
