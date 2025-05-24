@@ -8,13 +8,7 @@ st.write("Video 1:")
 st.video("https://www.youtube.com/watch?v=dein_video")  # Ersetze den Link durch dein Video
 
 if st.button("Mission Starten"):
-    st.success("Mission gestartet! Navigiere weiter zum nächsten Kapitel.")
-    
-col1, col2 = st.columns([1,1])
-
-with col1:
-    if st.button("Zurück"):
-        st.switch_page("streamlit_app.py")
-with col2:
-    if st.button("Weiter"):
+    st.success("Mission gestartet! Navigiere weiter zum nächsten Kapitel.") 
+    and if st.button("Weiter"):
         st.switch_page("pages/3_Kapitel1.py")
+    
