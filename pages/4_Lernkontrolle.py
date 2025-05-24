@@ -23,7 +23,6 @@ def reset_lernkontrolle():
     st.session_state["abgegeben"] = False
     st.session_state["feedback"] = None
     st.session_state["radio_key"] += 1  # erzwingt ein neues Widget beim nächsten Rendern
-    st.experimental_rerun()  # Seite wird sofort neu geladen
 
 # Radio-Button für die Auswahl, wird nach Reset neu aufgebaut
 auswahl = st.radio(
