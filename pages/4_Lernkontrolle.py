@@ -11,7 +11,6 @@ antworten = [
 ]
 richtige_antwort = 1  # Index der richtigen Antwort
 
-# Ein dynamischer Key für das Radio-Widget, damit es bei Reset neu gebaut wird
 if "radio_key" not in st.session_state:
     st.session_state["radio_key"] = 0
 if "abgegeben" not in st.session_state:
@@ -19,12 +18,19 @@ if "abgegeben" not in st.session_state:
 if "feedback" not in st.session_state:
     st.session_state["feedback"] = None
 
+def abgabe_callback():
+    st.session_state["abgegeben"] = True
+    auswahl = st.session_state[f"lernkontrolle_radio_{st.session_state['radio_key']}"]
+    if antworten.index(auswahl) == richtige_antwort:
+        st.session_state["feedback"] = "richtig"
+    else:
+        st.session_state["feedback"] = "falsch"
+
 def reset_lernkontrolle():
     st.session_state["abgegeben"] = False
     st.session_state["feedback"] = None
     st.session_state["radio_key"] += 1  # erzwingt ein neues Widget beim nächsten Rendern
 
-# Radio-Button für die Auswahl, wird nach Reset neu aufgebaut
 auswahl = st.radio(
     "Wähle die richtige Antwort:",
     antworten,
@@ -33,26 +39,16 @@ auswahl = st.radio(
 )
 
 # "Abgabe"-Button nur anzeigen, wenn noch nicht abgegeben wurde
-abgabe_clicked = False
 if not st.session_state["abgegeben"]:
-    abgabe_clicked = st.button("Abgabe")
-    if abgabe_clicked:
-        st.session_state["abgegeben"] = True
-        if antworten.index(auswahl) == richtige_antwort:
-            st.session_state["feedback"] = "richtig"
-        else:
-            st.session_state["feedback"] = "falsch"
-        st.experimental_rerun()  # Seite sofort neu laden, damit der Button verschwindet
+    st.button("Abgabe", on_click=abgabe_callback)
 
 # Feedback und "Wiederholen"/"Weiter"-Button
 if st.session_state["abgegeben"]:
     if st.session_state["feedback"] == "richtig":
         st.success("✅ Richtig! Lean Startup bedeutet, schnell zu lernen.")
         if st.button("Weiter"):
-            # Hier ggf. auf die nächste Seite springen
             st.switch_page("pages/5_NaechstesKapitel.py")
     else:
         st.error("❌ Fast! Denk nochmal an das Build-Measure-Learn-Prinzip.")
         if st.button("Wiederholen"):
             reset_lernkontrolle()
-            st.experimental_rerun()  # Seite sofort neu laden
