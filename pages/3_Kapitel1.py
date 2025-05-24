@@ -20,16 +20,19 @@ if "kapitel1_visited" not in st.session_state:
         st.session_state[f"tile_{idx}_clicked"] = False
     st.session_state["kapitel1_visited"] = True
 
-# Stil für die dynamischen Kacheln
+# Stil für die Kacheln
 st.markdown("""
     <style>
     .tile-container {
         background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 2px 12px #0001;
-        padding: 1.5em 1.2em 1.2em 1.2em;
-        margin-bottom: 1.5em;
-        min-height: 80px;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px #0001;
+        padding: 1.3em 1.2em 1.2em 1.2em;
+        margin-bottom: 1.7em;
+        min-height: 90px;
+        max-width: 540px;
+        margin-left: auto;
+        margin-right: auto;
         transition: min-height 0.3s;
         display: flex;
         flex-direction: column;
@@ -38,7 +41,7 @@ st.markdown("""
     .tile-header {
         display: flex;
         align-items: center;
-        font-size: 1.15em;
+        font-size: 1.17em;
         font-weight: bold;
         margin-bottom: 0.7em;
         color: #222831;
