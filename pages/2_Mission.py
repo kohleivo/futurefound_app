@@ -7,8 +7,9 @@ if "mission_gestartet" not in st.session_state:
 st.title("Mission")
 st.write("Video 1:")
 
-# Beispielvideo (ersetzen durch eigenen Link oder Datei)
-st.video("https://www.youtube.com/watch?v=dein_video")
+video_file = open("video2.mp4", "rb")
+video_bytes = video_file.read()
+st.video(video_bytes)
 
 # Button-Callback-Funktion
 def mission_starten():
