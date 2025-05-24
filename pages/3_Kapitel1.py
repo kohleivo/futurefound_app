@@ -9,7 +9,11 @@ if "kapitel1_visited" not in st.session_state:
 st.title("Kapitel 1")
 st.header("Einführung in Kapitel 1")
 
-st.video("https://www.youtube.com/watch?v=dein_video2")  # Ersetze durch dein Video
+# Video zentriert anzeigen
+st.markdown('<div class="video-container">', unsafe_allow_html=True)
+with open("video 2.mp4", "rb") as video_file:
+    st.video(video_file.read())
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.subheader("Lernziel 1: Du verstehst, was Lean Startup bedeutet – und was es nicht ist.")
 
