@@ -96,7 +96,7 @@ if st.session_state["abgegeben"]:
     if st.session_state["feedback"] == "richtig":
         st.success("✅ Richtig! Lean Startup bedeutet, schnell zu lernen.")
         if st.button("Weiter"):
-            st.switch_page("pages/5_NaechstesKapitel.py")
+            st.switch_page("pages/5_Kapitel2.py")
     else:
         st.error("❌ Fast! Denk nochmal an das Build-Measure-Learn-Prinzip.")
         if st.button("Wiederholen"):
