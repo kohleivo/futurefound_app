@@ -169,4 +169,4 @@ if st.session_state["k2_abgegeben"]:
         )
         if st.button("Wiederholen"):
             reset_pending()
-            st.info("🔄 Gleich geht's weiter! Die Frage wird jetzt neu geladen ...")
+            st.info("🔄 Gleich geht's weiter! Drücke erneut Wiederholen...")
