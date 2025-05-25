@@ -76,4 +76,4 @@ with col2:
         for idx in range(4):
             st.session_state[f"tile_{idx}_clicked"] = False
         st.session_state["kapitel1_visited"] = False
-        st.switch_page("pages/4_Lernkontrolle.py")
+        st.switch_page("pages/4_Kapitel1_Lernkontrolle.py")
