@@ -13,8 +13,7 @@ st.markdown("""
     .stepper-ball.done { background: linear-gradient(135deg, #00adb5 70%, #393e46 100%); color: #fff; border: 2.5px solid #00adb5; }
     .stepper-bar { flex: 1; height: 6px; background: #393e46; border-radius: 3px; margin: 0 3px; position: relative; min-width: 28px; max-width: 70px; }
     .stepper-bar-fill { height: 100%; background: #00adb5; border-radius: 3px; position: absolute; left: 0; top: 0; transition: width 0.3s; }
-    .feedback-bubble { background: #fff; color: #23272f; border-radius: 16px; padding: 1em 1.1em; margin: 1.3em 0 1.3em 0; box-shadow: 0 2px 12px #00adb522; position: relative; max-width: 480px; }
-    .avatar { position: absolute; left: -56px; top: 0; font-size: 2.5em; }
+    .szenario-box { background: #393e46; color: #fff; border-radius: 12px; padding: 1.1em 1.4em; margin: 1.3em 0 1.3em 0; border-left: 6px solid #00adb5; font-size: 1.05em; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -39,7 +38,7 @@ def stepper(current, total):
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- Fragen und Feedback ---
+# --- Fragen und Feedback, inkl. Szenario als 5. Punkt ---
 fragen = [
     {
         "frage": "Wofür steht die Abkürzung BML im Lean-Startup-Ansatz?",
@@ -88,6 +87,21 @@ fragen = [
         "richtig": 1,
         "feedback_richtig": "GründerIn sagt: Ah, wir müssen also rausfinden, was unsere User wirklich brauchen!",
         "feedback_falsch": "GründerIn sagt: Das macht wenig Sinn, probiere es nochmals!"
+    },
+    # --- Szenario-Frage als 5. Punkt ---
+    {
+        "szenario": True,
+        "frage": "Szenario: FutureFound hat ein MVP released – 100 Downloads, aber kaum aktive Nutzung.",
+        "aufgabe": "Wie gehst du vor?",
+        "antworten": [
+            "Neues Feature entwickeln",
+            "NutzerInnen interviewen",
+            "Werbung schalten",
+            "Produkt stoppen"
+        ],
+        "richtig": 1,
+        "feedback_richtig": "✅ Richtig! NutzerInnen zu interviewen ist der beste Weg, um herauszufinden, warum das Produkt nicht genutzt wird. GründerIn sagt: Jetzt bekommen wir echte Einblicke, was fehlt oder nicht passt.",
+        "feedback_falsch": "❌ Das ist nicht die beste Wahl. GründerIn sagt: Es ist wichtig, zuerst zu verstehen, warum die NutzerInnen nicht aktiv sind – Interviews helfen uns dabei am meisten."
     }
 ]
 
@@ -111,9 +125,14 @@ st.markdown('<div class="subtitle">Build – Measure – Learn (BML)</div>', uns
 stepper(aktuelle_frage, gesamt_fragen)
 st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
 
-# --- Frage anzeigen ---
+# --- Frage oder Szenario anzeigen ---
 frage = fragen[aktuelle_frage]
-st.markdown(f"<b>{frage['frage']}</b>", unsafe_allow_html=True)
+
+if "szenario" in frage and frage["szenario"]:
+    st.markdown(f'<div class="szenario-box"><b>Szenario:</b> {frage["frage"]}</div>', unsafe_allow_html=True)
+    st.markdown(f"<b>{frage['aufgabe']}</b>", unsafe_allow_html=True)
+else:
+    st.markdown(f"<b>{frage['frage']}</b>", unsafe_allow_html=True)
 
 auswahl = st.radio(
     "Antwort auswählen:",
@@ -134,10 +153,7 @@ if not st.session_state["k2_abgegeben"]:
 # --- Feedback & Navigation ---
 if st.session_state["k2_abgegeben"]:
     if st.session_state["k2_feedback"] == "richtig":
-        st.markdown(
-            f'<div class="feedback-bubble"><span class="avatar">🧑‍💼</span> <b>{frage["feedback_richtig"]}</b></div>',
-            unsafe_allow_html=True
-        )
+        st.success(frage["feedback_richtig"])
         if aktuelle_frage < gesamt_fragen-1:
             if st.button("Weiter"):
                 st.session_state["k2_frage_idx"] += 1
@@ -152,10 +168,7 @@ if st.session_state["k2_abgegeben"]:
                 st.session_state["k2_radio_key"] += 1
                 st.switch_page("pages/6_Kapitelübersicht.py")
     else:
-        st.markdown(
-            f'<div class="feedback-bubble"><span class="avatar">🧑‍💼</span> <b>{frage["feedback_falsch"]}</b></div>',
-            unsafe_allow_html=True
-        )
+        st.error(frage["feedback_falsch"])
         if st.button("Wiederholen"):
             st.session_state["k2_abgegeben"] = False
             st.session_state["k2_feedback"] = None
