@@ -76,4 +76,4 @@ with col1:
         st.switch_page("pages/3_Kapitelübersicht.py")
 with col2:
     if st.button("Weiter"):
-        st.switch_page("pages/5_Kapitel2_Lernkontrolle.py")
+        st.switch_page("pages/6_Kapitel2_Lernkontrolle.py")
