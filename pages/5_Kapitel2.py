@@ -1,21 +1,98 @@
 import streamlit as st
 
-# --- Stil und Schrittzähler ---
-st.markdown("""
-    <style>
-    .stApp { background: #23272f !important; }
-    .main-title { font-size: 2.1em; font-weight: bold; color: #fff; text-align: center; }
-    .subtitle { color: #d9e0e7; font-size: 1.18em; margin-bottom: 1.4em; text-align: center; }
-    .white-divider { height: 2px; width: 100%; background: #fff; margin: 32px 0 28px 0; border: none; border-radius: 2px; box-shadow: 0 1px 4px #0001; }
-    .stepper { display: flex; align-items: center; justify-content: center; margin-bottom: 1.2em; }
-    .step { width: 30px; height: 30px; border-radius: 50%; background: #393e46; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; margin: 0 8px; border: 2.5px solid #00adb5; }
-    .step.active { background: #00adb5; color: #23272f; border: 2.5px solid #fff; }
-    .progress-bar-bg { width: 180px; height: 8px; background: #393e46; border-radius: 6px; margin: 0 10px; }
-    .progress-bar-fg { height: 8px; background: #00adb5; border-radius: 6px; }
-    .feedback-bubble { background: #fff; color: #23272f; border-radius: 16px; padding: 1em 1.1em; margin: 1.3em 0 1.3em 0; box-shadow: 0 2px 12px #00adb522; position: relative; max-width: 480px; }
-    .avatar { position: absolute; left: -56px; top: 0; font-size: 2.5em; }
-    </style>
-""", unsafe_allow_html=True)
+# Schrittzähler-Design für dunklen Hintergrund
+def stepper(current, total, labels=None):
+    st.markdown("""
+        <style>
+        .stepper-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1.2em 0 1.8em 0;
+        }
+        .stepper-ball {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #393e46;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.15em;
+            margin: 0 8px;
+            border: 2.5px solid #393e46;
+            transition: background 0.2s, color 0.2s;
+        }
+        .stepper-ball.active {
+            background: #00adb5;
+            color: #23272f;
+            border: 2.5px solid #fff;
+            box-shadow: 0 0 0 4px #00adb522;
+        }
+        .stepper-ball.done {
+            background: linear-gradient(135deg, #00adb5 70%, #393e46 100%);
+            color: #fff;
+            border: 2.5px solid #00adb5;
+        }
+        .stepper-label {
+            color: #bfc9d1;
+            font-size: 0.95em;
+            text-align: center;
+            margin-top: 0.2em;
+        }
+        .stepper-bar {
+            flex: 1;
+            height: 6px;
+            background: #393e46;
+            border-radius: 3px;
+            margin: 0 3px;
+            position: relative;
+        }
+        .stepper-bar-fill {
+            height: 100%;
+            background: #00adb5;
+            border-radius: 3px;
+            position: absolute;
+            left: 0; top: 0;
+            transition: width 0.3s;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    balls = []
+    for i in range(total):
+        ball_class = "stepper-ball"
+        if i < current:
+            ball_class += " done"
+        elif i == current:
+            ball_class += " active"
+        balls.append(f'<div class="{ball_class}">{i+1}</div>')
+    # Fortschrittsbalken
+    bars = []
+    for i in range(total-1):
+        fill = "100%" if i < current else "0%"
+        bars.append(f'<div class="stepper-bar"><div class="stepper-bar-fill" style="width:{fill};"></div></div>')
+    # Kombinieren
+    html = '<div class="stepper-wrap">'
+    for i in range(total):
+        html += balls[i]
+        if i < total-1:
+            html += bars[i]
+    html += '</div>'
+    # Labels (optional)
+    if labels:
+        html += '<div style="display:flex;justify-content:center;gap:30px;">'
+        for i in range(total):
+            html += f'<div class="stepper-label">{labels[i]}</div>'
+        html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
+
+# Beispiel-Aufruf in deinem Kapitel:
+aktuelle_frage = st.session_state["k2_frage_idx"]
+gesamt_fragen = len(fragen)
+stepper(aktuelle_frage, gesamt_fragen)
+
 
 # --- Fragen und Feedback ---
 fragen = [
