@@ -37,7 +37,7 @@ def stepper(current, total):
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- Beispiel-Fragen und Feedback für page4_Lernkontrolle ---
+# --- Fragen, Antworten und Feedback wie im Original ---
 fragen = [
     {
         "frage": "Was beschreibt den Kern des Lean-Startup-Ansatzes?",
@@ -63,40 +63,46 @@ fragen = [
         "feedback_richtig": "✅ Richtig! Ein MVP ist die einfachste Version, um schnell zu testen.",
         "feedback_falsch": "❌ Das ist nicht korrekt. Überleg nochmal, was ein MVP leisten soll."
     }
-    # Weitere Fragen nach Bedarf ergänzen!
+    # Du kannst beliebig weitere Fragen ergänzen!
 ]
 
-# --- Session State für Quiz ---
-if "k4_frage_idx" not in st.session_state:
-    st.session_state["k4_frage_idx"] = 0
-if "k4_abgegeben" not in st.session_state:
-    st.session_state["k4_abgegeben"] = False
-if "k4_feedback" not in st.session_state:
-    st.session_state["k4_feedback"] = None
-if "k4_radio_key" not in st.session_state:
-    st.session_state["k4_radio_key"] = 0
-if "k4_reset_pending" not in st.session_state:
-    st.session_state["k4_reset_pending"] = False
+# --- Session State ---
+if "radio_key" not in st.session_state:
+    st.session_state["radio_key"] = 0
+if "abgegeben" not in st.session_state:
+    st.session_state["abgegeben"] = False
+if "feedback" not in st.session_state:
+    st.session_state["feedback"] = None
+if "reset_pending" not in st.session_state:
+    st.session_state["reset_pending"] = False
+if "frage_idx" not in st.session_state:
+    st.session_state["frage_idx"] = 0
 
-# --- Reset-Logik ---
-def reset_frage():
-    st.session_state["k4_abgegeben"] = False
-    st.session_state["k4_feedback"] = None
-    st.session_state["k4_radio_key"] += 1
+def abgabe_callback():
+    st.session_state["abgegeben"] = True
+    frage = fragen[st.session_state["frage_idx"]]
+    auswahl = st.session_state[f"lernkontrolle_radio_{st.session_state['radio_key']}"]
+    if frage["antworten"].index(auswahl) == frage["richtig"]:
+        st.session_state["feedback"] = "richtig"
+    else:
+        st.session_state["feedback"] = "falsch"
 
-def reset_pending():
-    st.session_state["k4_reset_pending"] = True
+def reset_lernkontrolle():
+    st.session_state["reset_pending"] = True
 
-if st.session_state["k4_reset_pending"]:
-    reset_frage()
-    st.session_state["k4_reset_pending"] = False
+# Sofortiger Reset beim nächsten Rendern nach dem ersten Klick auf "Wiederholen"
+if st.session_state["reset_pending"]:
+    st.session_state["abgegeben"] = False
+    st.session_state["feedback"] = None
+    st.session_state["radio_key"] += 1
+    st.session_state["reset_pending"] = False
 
 # --- Fehlerbehandlung für Index ---
-aktuelle_frage = min(st.session_state["k4_frage_idx"], len(fragen)-1)
+aktuelle_frage = min(st.session_state["frage_idx"], len(fragen)-1)
 gesamt_fragen = len(fragen)
 
 # --- Titel, Stepper, Divider ---
-st.markdown('<div class="main-title">Kapitel 4: Lernkontrolle</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">Lernkontrolle, Kapitel 1</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Teste dein Wissen zum Lean-Startup-Ansatz!</div>', unsafe_allow_html=True)
 stepper(aktuelle_frage, gesamt_fragen)
 st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
@@ -106,36 +112,33 @@ frage = fragen[aktuelle_frage]
 st.markdown(f"<b>{frage['frage']}</b>", unsafe_allow_html=True)
 
 auswahl = st.radio(
-    "Antwort auswählen:",
+    "Wähle die richtige Antwort:",
     frage["antworten"],
-    key=f"k4_radio_{st.session_state['k4_radio_key']}_{aktuelle_frage}",
-    disabled=st.session_state["k4_abgegeben"]
+    key=f"lernkontrolle_radio_{st.session_state['radio_key']}",
+    disabled=st.session_state["abgegeben"]
 )
 
-# --- Abgabe-Button ---
-if not st.session_state["k4_abgegeben"]:
-    if st.button("Abgabe"):
-        st.session_state["k4_abgegeben"] = True
-        if frage["antworten"].index(auswahl) == frage["richtig"]:
-            st.session_state["k4_feedback"] = "richtig"
-        else:
-            st.session_state["k4_feedback"] = "falsch"
+if not st.session_state["abgegeben"]:
+    st.button("Abgabe", on_click=abgabe_callback)
 
-# --- Feedback & Navigation ---
-if st.session_state["k4_abgegeben"]:
-    if st.session_state["k4_feedback"] == "richtig":
+if st.session_state["abgegeben"]:
+    if st.session_state["feedback"] == "richtig":
         st.success(frage["feedback_richtig"])
         if aktuelle_frage < gesamt_fragen-1:
             if st.button("Weiter"):
-                st.session_state["k4_frage_idx"] += 1
-                reset_frage()
+                st.session_state["frage_idx"] += 1
+                st.session_state["abgegeben"] = False
+                st.session_state["feedback"] = None
+                st.session_state["radio_key"] += 1
         else:
-            if st.button("Zurück zu Kapitelübersicht"):
-                st.session_state["k4_frage_idx"] = 0
-                reset_frage()
+            if st.button("Zurück zur Übersicht"):
+                st.session_state["frage_idx"] = 0
+                st.session_state["abgegeben"] = False
+                st.session_state["feedback"] = None
+                st.session_state["radio_key"] += 1
                 st.switch_page("pages/6_Kapitelübersicht.py")
     else:
         st.error(frage["feedback_falsch"])
         if st.button("Wiederholen"):
-            reset_pending()
+            reset_lernkontrolle()
             st.info("🔄 Gleich geht's weiter! Die Frage wird jetzt neu geladen ...")
