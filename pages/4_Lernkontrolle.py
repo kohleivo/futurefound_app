@@ -13,8 +13,6 @@ st.markdown("""
     .stepper-ball.done { background: linear-gradient(135deg, #00adb5 70%, #393e46 100%); color: #fff; border: 2.5px solid #00adb5; }
     .stepper-bar { flex: 1; height: 6px; background: #393e46; border-radius: 3px; margin: 0 3px; position: relative; min-width: 28px; max-width: 70px; }
     .stepper-bar-fill { height: 100%; background: #00adb5; border-radius: 3px; position: absolute; left: 0; top: 0; transition: width 0.3s; }
-    .feedback-bubble { background: #fff; color: #23272f; border-radius: 16px; padding: 1em 1.1em; margin: 1.3em 0 1.3em 0; box-shadow: 0 2px 12px #00adb522; position: relative; max-width: 480px; }
-    .avatar { position: absolute; left: -56px; top: 0; font-size: 2.5em; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -39,33 +37,33 @@ def stepper(current, total):
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- Beispiel-Fragen für Kapitel 4/Lernkontrolle ---
+# --- Beispiel-Fragen und Feedback für page4_Lernkontrolle ---
 fragen = [
     {
-        "frage": "Was ist der wichtigste Vorteil des Lean-Startup-Ansatzes?",
+        "frage": "Was beschreibt den Kern des Lean-Startup-Ansatzes?",
         "antworten": [
+            "Mit möglichst wenig Geld ein Unternehmen gründen.",
             "Schnell zu lernen und das Geschäftsmodell anzupassen.",
-            "So wenig Geld wie möglich auszugeben.",
-            "Immer einen festen Plan zu verfolgen.",
-            "Nur für Tech-Startups geeignet zu sein."
+            "Nur für Tech-Startups geeignet.",
+            "Einen festen Plan verfolgen."
         ],
-        "richtig": 0,
-        "feedback_richtig": "GründerIn sagt: Genau! Es geht darum, schnell zu lernen und flexibel zu bleiben.",
-        "feedback_falsch": "GründerIn sagt: Nicht ganz, probier es nochmal und denk an das schnelle Lernen!"
+        "richtig": 1,
+        "feedback_richtig": "✅ Richtig! Lean Startup bedeutet, schnell zu lernen.",
+        "feedback_falsch": "❌ Fast! Denk nochmal an das Build-Measure-Learn-Prinzip."
     },
     {
-        "frage": "Was beschreibt ein MVP (Minimum Viable Product) am besten?",
+        "frage": "Was ist ein MVP (Minimum Viable Product)?",
         "antworten": [
-            "Ein Produkt mit möglichst vielen Features.",
-            "Ein Prototyp, der nur intern getestet wird.",
+            "Ein Produkt mit allen Features.",
             "Die minimal funktionsfähige Version, um Annahmen zu testen.",
+            "Ein Produkt, das nur intern genutzt wird.",
             "Ein Produkt, das sofort an alle verkauft wird."
         ],
-        "richtig": 2,
-        "feedback_richtig": "GründerIn sagt: Richtig! Ein MVP testet die wichtigsten Annahmen mit minimalem Aufwand.",
-        "feedback_falsch": "GründerIn sagt: Leider falsch. Überleg nochmal, was das Ziel eines MVP ist."
+        "richtig": 1,
+        "feedback_richtig": "✅ Richtig! Ein MVP ist die einfachste Version, um schnell zu testen.",
+        "feedback_falsch": "❌ Das ist nicht korrekt. Überleg nochmal, was ein MVP leisten soll."
     }
-    # Füge hier weitere Fragen nach deinem Bedarf hinzu!
+    # Weitere Fragen nach Bedarf ergänzen!
 ]
 
 # --- Session State für Quiz ---
@@ -126,10 +124,7 @@ if not st.session_state["k4_abgegeben"]:
 # --- Feedback & Navigation ---
 if st.session_state["k4_abgegeben"]:
     if st.session_state["k4_feedback"] == "richtig":
-        st.markdown(
-            f'<div class="feedback-bubble"><span class="avatar">🧑‍💼</span> <b>{frage["feedback_richtig"]}</b></div>',
-            unsafe_allow_html=True
-        )
+        st.success(frage["feedback_richtig"])
         if aktuelle_frage < gesamt_fragen-1:
             if st.button("Weiter"):
                 st.session_state["k4_frage_idx"] += 1
@@ -140,10 +135,7 @@ if st.session_state["k4_abgegeben"]:
                 reset_frage()
                 st.switch_page("pages/6_Kapitelübersicht.py")
     else:
-        st.markdown(
-            f'<div class="feedback-bubble"><span class="avatar">🧑‍💼</span> <b>{frage["feedback_falsch"]}</b></div>',
-            unsafe_allow_html=True
-        )
+        st.error(frage["feedback_falsch"])
         if st.button("Wiederholen"):
             reset_pending()
             st.info("🔄 Gleich geht's weiter! Die Frage wird jetzt neu geladen ...")
