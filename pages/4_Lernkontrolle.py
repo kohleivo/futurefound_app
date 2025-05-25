@@ -141,4 +141,4 @@ if st.session_state["abgegeben"]:
         st.error(frage["feedback_falsch"])
         if st.button("Wiederholen"):
             reset_lernkontrolle()
-            st.info("🔄 Gleich geht's weiter! Die Frage wird jetzt neu geladen ...")
+            st.info("🔄 Gleich geht's weiter! Drücke erneut Wiederholen...")
