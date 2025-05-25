@@ -1,5 +1,6 @@
 import streamlit as st
 
+# --- Stil und Schrittzähler ---
 st.markdown("""
     <style>
     .stApp { background: #23272f !important; }
@@ -52,7 +53,42 @@ fragen = [
         "feedback_richtig": "GründerIn sagt: Genau! Build – Measure – Learn ist der Kern des Lean-Startup-Ansatzes.",
         "feedback_falsch": "GründerIn sagt: Das stimmt so nicht. Probier es nochmals!"
     },
-    # ...weitere Fragen wie gehabt...
+    {
+        "frage": "Was beschreibt den Lean-Ansatz im Sinne von Build – Measure – Learn (BML)?",
+        "antworten": [
+            "Möglichst günstig ein Produkt entwickeln und verkaufen",
+            "Schnell ein vollständiges Produkt bauen und intensiv bewerben",
+            "Ideen schrittweise testen, Daten sammeln und daraus lernen",
+            "Einmal planen und dann konsequent umsetzen"
+        ],
+        "richtig": 2,
+        "feedback_richtig": "GründerIn sagt: Genau! Schrittweises Testen und Lernen ist entscheidend.",
+        "feedback_falsch": "GründerIn sagt: Nicht ganz. Denk an das Prinzip: Testen, messen, lernen!"
+    },
+    {
+        "frage": "Wofür steht MVP (Minimum Viable Product ) im Lean-Startup-Kontext?",
+        "antworten": [
+            "Es handelt sich um das fertige, ausgereifte Produkt, das alle Features umfasst.",
+            "Es ist das minimal funktionsfähige Produkt, um die wichtigsten Annahmen zu testen und Feedback zu erhalten.",
+            "Es ist das teuerste und umfangreichste Produkt, das den gesamten Markt ansprechen soll.",
+            "Es ist ein Prototyp, der nur intern verwendet wird, um technische Lösungen zu validieren."
+        ],
+        "richtig": 1,
+        "feedback_richtig": "GründerIn sagt: Richtig! Ein MVP ist die einfachste Version, um schnell zu testen.",
+        "feedback_falsch": "GründerIn sagt: Das ist nicht korrekt. Überleg nochmal, was ein MVP leisten soll."
+    },
+    {
+        "frage": "Wie reagierst du in unserem Beispiel?",
+        "antworten": [
+            "Neues Feature entwickeln",
+            "NutzerInnen interviewen",
+            "Mehr Werbung schalten",
+            "Das Produkt einstellen"
+        ],
+        "richtig": 1,
+        "feedback_richtig": "GründerIn sagt: Ah, wir müssen also rausfinden, was unsere User wirklich brauchen!",
+        "feedback_falsch": "GründerIn sagt: Das macht wenig Sinn, probiere es nochmals!"
+    }
 ]
 
 # --- Session State für Quiz ---
@@ -67,11 +103,33 @@ if "k2_radio_key" not in st.session_state:
 if "k2_reset_pending" not in st.session_state:
     st.session_state["k2_reset_pending"] = False
 
-# --- Button-Logik direkt am Anfang prüfen ---
-aktuelle_frage = st.session_state["k2_frage_idx"]
-frage = fragen[aktuelle_frage]
+# --- Reset-Logik ---
+def reset_frage():
+    st.session_state["k2_abgegeben"] = False
+    st.session_state["k2_feedback"] = None
+    st.session_state["k2_radio_key"] += 1
 
-# Radio-Auswahl immer vor Button-Logik
+def reset_pending():
+    st.session_state["k2_reset_pending"] = True
+
+if st.session_state["k2_reset_pending"]:
+    reset_frage()
+    st.session_state["k2_reset_pending"] = False
+
+# --- Fehlerbehandlung für Index ---
+aktuelle_frage = min(st.session_state["k2_frage_idx"], len(fragen)-1)
+gesamt_fragen = len(fragen)
+
+# --- Titel, Stepper, Divider ---
+st.markdown('<div class="main-title">Kapitel 2: Der Lean-Zyklus</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Build – Measure – Learn (BML)</div>', unsafe_allow_html=True)
+stepper(aktuelle_frage, gesamt_fragen)
+st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
+
+# --- Frage anzeigen ---
+frage = fragen[aktuelle_frage]
+st.markdown(f"<b>{frage['frage']}</b>", unsafe_allow_html=True)
+
 auswahl = st.radio(
     "Antwort auswählen:",
     frage["antworten"],
@@ -79,26 +137,16 @@ auswahl = st.radio(
     disabled=st.session_state["k2_abgegeben"]
 )
 
-# Button-Logik: Abgabe zuerst prüfen und State setzen, dann erst Rendern
+# --- Abgabe-Button ---
 if not st.session_state["k2_abgegeben"]:
-    abgabe_clicked = st.button("Abgabe")
-    if abgabe_clicked:
+    if st.button("Abgabe"):
         st.session_state["k2_abgegeben"] = True
         if frage["antworten"].index(auswahl) == frage["richtig"]:
             st.session_state["k2_feedback"] = "richtig"
         else:
             st.session_state["k2_feedback"] = "falsch"
-        st.experimental_rerun()  # <-- Seite sofort neu laden, Button verschwindet direkt
 
-# Schrittzähler und Layout wie gehabt
-gesamt_fragen = len(fragen)
-st.markdown('<div class="main-title">Kapitel 2: Der Lean-Zyklus</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">Build – Measure – Learn (BML)</div>', unsafe_allow_html=True)
-stepper(aktuelle_frage, gesamt_fragen)
-st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
-st.markdown(f"<b>{frage['frage']}</b>", unsafe_allow_html=True)
-
-# Feedback & Navigation
+# --- Feedback & Navigation ---
 if st.session_state["k2_abgegeben"]:
     if st.session_state["k2_feedback"] == "richtig":
         st.markdown(
@@ -108,15 +156,11 @@ if st.session_state["k2_abgegeben"]:
         if aktuelle_frage < gesamt_fragen-1:
             if st.button("Weiter"):
                 st.session_state["k2_frage_idx"] += 1
-                st.session_state["k2_abgegeben"] = False
-                st.session_state["k2_feedback"] = None
-                st.session_state["k2_radio_key"] += 1
+                reset_frage()
         else:
             if st.button("Zurück zu Kapitelübersicht"):
                 st.session_state["k2_frage_idx"] = 0
-                st.session_state["k2_abgegeben"] = False
-                st.session_state["k2_feedback"] = None
-                st.session_state["k2_radio_key"] += 1
+                reset_frage()
                 st.switch_page("pages/6_Kapitelübersicht.py")
     else:
         st.markdown(
@@ -124,7 +168,5 @@ if st.session_state["k2_abgegeben"]:
             unsafe_allow_html=True
         )
         if st.button("Wiederholen"):
-            st.session_state["k2_abgegeben"] = False
-            st.session_state["k2_feedback"] = None
-            st.session_state["k2_radio_key"] += 1
-            st.info("🔄 Gleich geht's weiter! Die Frage wird jetzt neu geladen ...")
+            reset_pending()
+            st.info("🔄 Gleich geht's weiter! Die Frage wird jetzt neu geladen
