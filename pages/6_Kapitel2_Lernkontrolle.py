@@ -38,7 +38,7 @@ def stepper(current, total):
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- Fragen und Feedback: Punkt 4 ist jetzt das Szenario ---
+# --- Fragen und Feedback, inkl. Szenario als 5. Punkt ---
 fragen = [
     {
         "frage": "Wofür steht die Abkürzung BML im Lean-Startup-Ansatz?",
@@ -76,16 +76,15 @@ fragen = [
         "feedback_richtig": "GründerIn sagt: Richtig! Ein MVP ist die einfachste Version, um schnell zu testen.",
         "feedback_falsch": "GründerIn sagt: Das ist nicht korrekt. Überleg nochmal, was ein MVP leisten soll."
     },
-    # --- Szenario-Frage als neuer Punkt 4 ---
     {
         "szenario": True,
-        "frage": "FutureFound hat ein MVP released – 100 Downloads, aber kaum aktive Nutzung.",
+        "frage": "Szenario: FutureFound hat ein MVP released – 100 Downloads, aber kaum aktive Nutzung.",
         "aufgabe": "Wie gehst du vor?",
         "antworten": [
-            "A: Neues Feature entwickeln",
-            "B: NutzerInnen interviewen",
-            "C: Werbung schalten",
-            "D: Produkt stoppen"
+            "Neues Feature entwickeln",
+            "NutzerInnen interviewen",
+            "Werbung schalten",
+            "Produkt stoppen"
         ],
         "richtig": 1,
         "feedback_richtig": "✅ Richtig! NutzerInnen zu interviewen ist der beste Weg, um herauszufinden, warum das Produkt nicht genutzt wird. GründerIn sagt: Jetzt bekommen wir echte Einblicke, was fehlt oder nicht passt.",
@@ -141,10 +140,7 @@ if not st.session_state["k2_abgegeben"]:
 # --- Feedback & Navigation ---
 if st.session_state["k2_abgegeben"]:
     if st.session_state["k2_feedback"] == "richtig":
-        st.markdown(
-            f'<div class="feedback-bubble"><span class="avatar">🧑‍💼</span> <b>{frage["feedback_richtig"]}</b></div>',
-            unsafe_allow_html=True
-        )
+        st.success(frage["feedback_richtig"])
         if aktuelle_frage < gesamt_fragen-1:
             if st.button("Weiter"):
                 st.session_state["k2_frage_idx"] += 1
@@ -159,10 +155,7 @@ if st.session_state["k2_abgegeben"]:
                 st.session_state["k2_radio_key"] += 1
                 st.switch_page("pages/6_Kapitelübersicht.py")
     else:
-        st.markdown(
-            f'<div class="feedback-bubble"><span class="avatar">🧑‍💼</span> <b>{frage["feedback_falsch"]}</b></div>',
-            unsafe_allow_html=True
-        )
+        st.error(frage["feedback_falsch"])
         if st.button("Wiederholen"):
             st.session_state["k2_abgegeben"] = False
             st.session_state["k2_feedback"] = None
