@@ -1,6 +1,6 @@
 import streamlit as st
 
-# --- Stil und Schrittzähler ---
+# --- Stil und Schrittzähler (wie Seite 5) ---
 st.markdown("""
     <style>
     .stApp { background: #23272f !important; }
@@ -13,8 +13,6 @@ st.markdown("""
     .stepper-ball.done { background: linear-gradient(135deg, #00adb5 70%, #393e46 100%); color: #fff; border: 2.5px solid #00adb5; }
     .stepper-bar { flex: 1; height: 6px; background: #393e46; border-radius: 3px; margin: 0 3px; position: relative; min-width: 28px; max-width: 70px; }
     .stepper-bar-fill { height: 100%; background: #00adb5; border-radius: 3px; position: absolute; left: 0; top: 0; transition: width 0.3s; }
-    .feedback-bubble { background: #fff; color: #23272f; border-radius: 16px; padding: 1em 1.1em; margin: 1.3em 0 1.3em 0; box-shadow: 0 2px 12px #00adb522; position: relative; max-width: 480px; }
-    .avatar { position: absolute; left: -56px; top: 0; font-size: 2.5em; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -39,9 +37,17 @@ def stepper(current, total):
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
-st.title("Lernkontrolle, Kapitel 1")
-st.subheader("Was beschreibt den Kern des Lean-Startup-Ansatzes?")
+# --- Titel, Stepper, Divider (wie Seite 5) ---
+st.markdown('<div class="main-title">Lernkontrolle, Kapitel 1</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Was beschreibt den Kern des Lean-Startup-Ansatzes?</div>', unsafe_allow_html=True)
 
+# --- Schrittzähler für 1 Frage (bei mehreren Fragen entsprechend anpassen) ---
+aktuelle_frage = 0
+gesamt_fragen = 1
+stepper(aktuelle_frage, gesamt_fragen)
+st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
+
+# --- Ursprüngliche Lernkontroll-Logik ---
 antworten = [
     "Mit möglichst wenig Geld ein Unternehmen gründen.",
     "Schnell zu lernen und das Geschäftsmodell anzupassen.",
@@ -70,7 +76,6 @@ def abgabe_callback():
 def reset_lernkontrolle():
     st.session_state["reset_pending"] = True
 
-# Sofortiger Reset beim nächsten Rendern nach dem ersten Klick auf "Wiederholen"
 if st.session_state["reset_pending"]:
     st.session_state["abgegeben"] = False
     st.session_state["feedback"] = None
