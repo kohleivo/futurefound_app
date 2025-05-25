@@ -118,9 +118,6 @@ auswahl = st.radio(
     disabled=st.session_state["abgegeben"]
 )
 
-if not st.session_state["abgegeben"]:
-    st.button("Abgabe", on_click=abgabe_callback)
-
 if st.session_state["abgegeben"]:
     if st.session_state["feedback"] == "richtig":
         st.success(frage["feedback_richtig"])
@@ -131,12 +128,13 @@ if st.session_state["abgegeben"]:
                 st.session_state["feedback"] = None
                 st.session_state["radio_key"] += 1
         else:
-            if st.button("Zurück zur Übersicht"):
+            # Hier Weiter-Button zu page5
+            if st.button("Weiter"):
                 st.session_state["frage_idx"] = 0
                 st.session_state["abgegeben"] = False
                 st.session_state["feedback"] = None
                 st.session_state["radio_key"] += 1
-                st.switch_page("pages/6_Kapitelübersicht.py")
+                st.switch_page("pages/5_Kapitel2.py")  # Passe ggf. an: z.B. "pages/5_Kapitel2.py"
     else:
         st.error(frage["feedback_falsch"])
         if st.button("Wiederholen"):
