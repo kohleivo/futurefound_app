@@ -68,10 +68,10 @@ with col1:
         for idx in range(4):
             st.session_state[f"tile_{idx}_clicked"] = False
         st.session_state["kapitel1_visited"] = False
-        st.switch_page("streamlit_app.py")
+        st.switch_page("5_Kapitel2_Lernkontrolle.py")
 with col3:
     if st.button("Weiter", key="weiter"):
         for idx in range(4):
             st.session_state[f"tile_{idx}_clicked"] = False
         st.session_state["kapitel1_visited"] = False
-        st.switch_page("pages/3_Kapitel1_Lernkontrolle.py")
+        st.switch_page("pages/7_Kapitel3_Lernkontrolle.py")
