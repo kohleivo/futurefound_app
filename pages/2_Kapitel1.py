@@ -13,6 +13,12 @@ st.header("Du verstehst, was Lean Startup bedeutet – und was es nicht ist.")
 st.markdown('<div class="video-container">', unsafe_allow_html=True)
 with open("video 2.mp4", "rb") as video_file:
     st.video(video_file.read())
+    st.markdown(
+    '<div style="font-size:0.95em; font-style:italic; color:#bfc9d1; text-align:left; margin-top:0.2em;">'
+    'Quelle: <a href="https://studyflix.de/wirtschaft-schueler/grunden-mit-dem-lean-startup-ansatz-546/video" style="color:#bfc9d1;" target="_blank">https://dein-link-zur-quelle.de</a>'
+    '</div>',
+    unsafe_allow_html=True
+)
 st.markdown('</div>', unsafe_allow_html=True)
 
 st.subheader("Lean Startup ist NICHT…")
