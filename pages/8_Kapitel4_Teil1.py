@@ -42,12 +42,15 @@ def stepper(current, total):
 # --- Fragen und Feedback, inkl. Szenario als 5. Punkt ---
 fragen = [
     {
-        "frage": "Was ist eine Problemhypothese im Lean-Startup-Kontext?",
+
+        "szenario": True,
+        "frage": "Szenario: FutureFound hat ein MVP released – 100 Downloads, aber kaum aktive Nutzung.",
+        "aufgabe": "Wie gehst du vor?",
         "antworten": [
-            "Eine technische Lösung für ein bekanntes Problem",
-            "Eine fundierte Annahme über ein echtes Kundenproblem",
-            "Die Liste der wichtigsten Features",
-            "Eine Marktprognose für die nächsten 6 Monate"
+            "Neues Feature entwickeln",
+            "NutzerInnen interviewen",
+            "Werbung schalten",
+            "Produkt stoppen"
         ],
         "richtig": 1,
         "feedback_richtig": "Genau! Eine Problemhypothese beschreibt ein potenzielles Kundenproblem, das vor der Produktentwicklung validiert wird.",
