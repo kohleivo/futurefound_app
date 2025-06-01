@@ -30,6 +30,13 @@ st.markdown(
 )
 st.markdown('</div>', unsafe_allow_html=True)
 
+st.markdown(
+    '<div class="info-text">'
+    'Viele Startups scheitern nicht an der Technologie – sondern daran, dass sie ein Produkt für ein Problem entwickeln, das niemand hat. Lean Startup kehrt diese Logik um:'
+    '</div>',
+    unsafe_allow_html=True
+)
+
 st.subheader("Lean Startup ist NICHT…")
 
 tiles = [
