@@ -50,5 +50,5 @@ with col1:
     if st.button("Zurück"):
         st.switch_page("pages/3_Kapitelübersicht.py")
 with col3:
-    if st.button("App beenden"):
+    if st.button("Fertig!"):
         st.switch_page("streamlit_app.py")
