@@ -9,6 +9,15 @@ if "kapitel1_visited" not in st.session_state:
 st.title("Startup Lean-Up! Vom Produkt zur validierten Problemhypothese")
 st.markdown('<div class="subtitle">Lernziel: Du lernst warum es entscheidend ist, zuerst das Problem zu verstehen – nicht das Produkt zu bauen.</div>', unsafe_allow_html=True)
 
+st.markdown(
+    '<div class="info-text">'
+    'Viele Startups scheitern nicht an der Technologie – sondern daran, dass sie ein Produkt für ein Problem entwickeln, das niemand hat. Lean Startup kehrt diese Logik um:'
+    '</div>',
+    unsafe_allow_html=True
+)
+
+st.subheader("Nicht zuerst entwickeln – sondern zuerst verstehen.")
+
 # --- YouTube-Video (nur von 0:00 bis 2:40 abspielbar) ---
 youtube_id = "dQw4w9WgXcQ"  # Ersetze durch die ID deines Videos!
 start_seconds = 0
@@ -29,15 +38,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 st.markdown('</div>', unsafe_allow_html=True)
-
-st.markdown(
-    '<div class="info-text">'
-    'Viele Startups scheitern nicht an der Technologie – sondern daran, dass sie ein Produkt für ein Problem entwickeln, das niemand hat. Lean Startup kehrt diese Logik um:'
-    '</div>',
-    unsafe_allow_html=True
-)
-
-st.subheader("Lean Startup ist NICHT…")
 
 tiles = [
     {"title": "Ein Startup ohne Geld", "info": "Lean hat nichts mit wenig Geld zu tun, sondern mit schnellem Lernen.", "icon": "💸"},
