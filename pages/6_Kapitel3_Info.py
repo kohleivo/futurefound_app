@@ -14,7 +14,7 @@ youtube_id = "dQw4w9WgXcQ"  # Ersetze durch die ID deines Videos!
 start_seconds = 0
 end_seconds = 160  # 2 Minuten 40 Sekunden
 
-embed_url = f"https://www.youtube.com/embed/watch?v=wXc-SWqBnKc?start=0&end=160&controls=1"
+embed_url = f"https://www.youtube.com/embed/wXc-SWqBnKc?start=0&end=160&controls=1"
 
 st.markdown(
     f"""
