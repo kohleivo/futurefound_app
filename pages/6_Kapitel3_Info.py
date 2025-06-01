@@ -9,12 +9,6 @@ if "kapitel1_visited" not in st.session_state:
 st.title("Startup Lean-Up! Vom Produkt zur validierten Problemhypothese")
 st.markdown('<div class="subtitle">Lernziel: Du lernst warum es entscheidend ist, zuerst das Problem zu verstehen – nicht das Produkt zu bauen.</div>', unsafe_allow_html=True)
 
-st.markdown(
-    '<div class="info-text">'
-    'Viele Startups scheitern nicht an der Technologie – sondern daran, dass sie ein Produkt für ein Problem entwickeln, das niemand hat. Lean Startup kehrt diese Logik um:'
-    '</div>',
-    unsafe_allow_html=True
-)
 
 # --- Szenario-Box (neu hinzugefügt, fett für die letzte Zeile) ---
 st.markdown("""
@@ -34,8 +28,8 @@ st.markdown("""
 st.markdown(
     '<div class="szenario-box">'
     'Viele Startups scheitern nicht an der Technologie – sondern daran, dass sie ein Produkt für ein Problem entwickeln, das niemand hat.<br>'
-    '<b>Lean Startup kehrt diese Logik um:</b><br>'
-    '<b>Nicht zuerst entwickeln – sondern zuerst verstehen.</b>'
+    'Lean Startup kehrt diese Logik um:</b><br>'
+    '<b><u>Nicht zuerst entwickeln – sondern zuerst verstehen.</b>'
     '</div>',
     unsafe_allow_html=True
 )
