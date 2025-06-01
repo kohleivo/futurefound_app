@@ -16,7 +16,29 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.subheader("Nicht zuerst entwickeln – sondern zuerst verstehen.")
+# --- Szenario-Box (neu hinzugefügt, fett für die letzte Zeile) ---
+st.markdown("""
+    <style>
+    .szenario-box {
+        background: #393e46;
+        color: #fff;
+        border-radius: 12px;
+        padding: 1.1em 1.4em;
+        margin: 1.3em 0 1.3em 0;
+        border-left: 6px solid #00adb5;
+        font-size: 1.05em;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+st.markdown(
+    '<div class="szenario-box">'
+    'Viele Startups scheitern nicht an der Technologie – sondern daran, dass sie ein Produkt für ein Problem entwickeln, das niemand hat.<br>'
+    '<b>Lean Startup kehrt diese Logik um:</b><br>'
+    '<b>Nicht zuerst entwickeln – sondern zuerst verstehen.</b>'
+    '</div>',
+    unsafe_allow_html=True
+)
 
 # --- YouTube-Video (nur von 0:00 bis 2:40 abspielbar) ---
 youtube_id = "dQw4w9WgXcQ"  # Ersetze durch die ID deines Videos!
@@ -103,4 +125,3 @@ with col3:
             st.session_state[f"tile_{idx}_clicked"] = False
         st.session_state["kapitel1_visited"] = False
         st.switch_page("pages/3_Kapitel1_Lernkontrolle.py")
-
