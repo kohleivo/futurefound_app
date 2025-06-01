@@ -77,7 +77,7 @@ col1, col2, col3 = st.columns([1, 6, 1])
 
 with col1:
     if st.button("Zurück"):
-        st.switch_page("pages/3_Kapitelübersicht.py")
+        st.switch_page("pages/3_Kapitel1_Lernkontrolle.py")
 with col3:
     if st.button("Weiter"):
-        st.switch_page("pages/6_Kapitel2_Lernkontrolle.py")
+        st.switch_page("pages/5_Kapitel2_Lernkontrolle.py")
