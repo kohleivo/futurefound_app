@@ -38,6 +38,32 @@ def stepper(current, total):
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
+
+# --- Szenario-Box (neu hinzugefügt, fett für die letzte Zeile) ---
+st.markdown("""
+    <style>
+    .szenario-box {
+        background: #393e46;
+        color: #fff;
+        border-radius: 12px;
+        padding: 1.1em 1.4em;
+        margin: 1.3em 0 1.3em 0;
+        border-left: 6px solid #00adb5;
+        font-size: 1.05em;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+st.markdown(
+    '<div class="szenario-box">'
+    'Viele Startups scheitern nicht an der Technologie – sondern daran, dass sie ein Produkt für ein Problem entwickeln, das niemand hat.<br>'
+    'Lean Startup kehrt diese Logik um:</b><br>'
+    '<b><u>Nicht zuerst entwickeln – sondern zuerst verstehen.</b>'
+    '</div>',
+    unsafe_allow_html=True
+)
+
+
 # --- Fragen und Feedback, inkl. Szenario als 5. Punkt ---
 fragen = [
     {
