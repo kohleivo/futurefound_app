@@ -127,6 +127,7 @@ auswahl = st.radio(
 )
 
 # --- Navigation-Logik ---
+# 1. Abgabe-Button (nur sichtbar, wenn noch nicht abgegeben)
 if not st.session_state["k2_abgegeben"]:
     if st.button("Abgabe"):
         st.session_state["k2_abgegeben"] = True
@@ -135,27 +136,30 @@ if not st.session_state["k2_abgegeben"]:
         else:
             st.session_state["k2_feedback"] = "falsch"
 
+# 2. Nach Abgabe: Feedback und "Weiter" oder "Wiederholen"
 if st.session_state["k2_abgegeben"]:
     if st.session_state["k2_feedback"] == "richtig":
         st.success(frage["feedback_richtig"])
-        if st.button("Weiter"):
+        weiter = st.button("Weiter")
+        if weiter:
             if aktuelle_frage < gesamt_fragen-1:
                 st.session_state["k2_frage_idx"] += 1
-                st.session_state["k2_abgegeben"] = False
-                st.session_state["k2_feedback"] = None
-                st.session_state["k2_radio_key"] += 1
             else:
-                # Letzte Frage -> nächste Seite
                 st.session_state["k2_frage_idx"] = 0
-                st.session_state["k2_abgegeben"] = False
-                st.session_state["k2_feedback"] = None
-                st.session_state["k2_radio_key"] += 1
                 st.switch_page("pages/6_Kapitel 3.py")
-    else:
-        st.error(frage["feedback_falsch"])
-        # Abstand vor dem Button
-        st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
-        if st.button("Wiederholen"):
+            # Reset für nächste Frage
             st.session_state["k2_abgegeben"] = False
             st.session_state["k2_feedback"] = None
             st.session_state["k2_radio_key"] += 1
+            st.experimental_set_query_params(dummy=str(st.session_state["k2_radio_key"]))  # Mini-Hack für sofortigen Render
+            st._rerun()
+    else:
+        st.error(frage["feedback_falsch"])
+        st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
+        wiederholen = st.button("Wiederholen")
+        if wiederholen:
+            st.session_state["k2_abgegeben"] = False
+            st.session_state["k2_feedback"] = None
+            st.session_state["k2_radio_key"] += 1
+            st.experimental_set_query_params(dummy=str(st.session_state["k2_radio_key"]))  # Mini-Hack für sofortigen Render
+            st._rerun()
