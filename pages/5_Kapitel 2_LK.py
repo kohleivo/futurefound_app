@@ -38,7 +38,7 @@ def stepper(current, total):
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- Fragen und Feedback, inkl. Szenario als 5. Punkt ---
+# --- Fragen und Feedback, inkl. Szenario als 4. Punkt ---
 fragen = [
     {
         "frage": "Wofür steht die Abkürzung BML im Lean-Startup-Ansatz?",
@@ -102,9 +102,9 @@ if "k2_feedback" not in st.session_state:
 if "k2_radio_key" not in st.session_state:
     st.session_state["k2_radio_key"] = 0
 
-# --- Fehlerbehandlung für Index ---
 aktuelle_frage = min(st.session_state["k2_frage_idx"], len(fragen)-1)
 gesamt_fragen = len(fragen)
+frage = fragen[aktuelle_frage]
 
 # --- Titel, Stepper, Divider ---
 st.markdown('<div class="main-title">Kapitel 2: Der Lean-Zyklus</div>', unsafe_allow_html=True)
@@ -113,8 +113,6 @@ stepper(aktuelle_frage, gesamt_fragen)
 st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
 
 # --- Frage oder Szenario anzeigen ---
-frage = fragen[aktuelle_frage]
-
 if "szenario" in frage and frage["szenario"]:
     st.markdown(f'<div class="szenario-box"><b>Szenario:</b> {frage["frage"]}</div>', unsafe_allow_html=True)
     st.markdown(f"<b>{frage['aufgabe']}</b>", unsafe_allow_html=True)
@@ -128,7 +126,7 @@ auswahl = st.radio(
     disabled=st.session_state["k2_abgegeben"]
 )
 
-# --- Abgabe-Button ---
+# --- Navigation-Logik ---
 if not st.session_state["k2_abgegeben"]:
     if st.button("Abgabe"):
         st.session_state["k2_abgegeben"] = True
@@ -136,29 +134,29 @@ if not st.session_state["k2_abgegeben"]:
             st.session_state["k2_feedback"] = "richtig"
         else:
             st.session_state["k2_feedback"] = "falsch"
+        st.experimental_rerun()  # Button verschwindet sofort, Feedback erscheint direkt
 
-# --- Feedback & Navigation ---
 if st.session_state["k2_abgegeben"]:
     if st.session_state["k2_feedback"] == "richtig":
         st.success(frage["feedback_richtig"])
-        if aktuelle_frage < gesamt_fragen-1:
-            if st.button("Weiter"):
+        if st.button("Weiter"):
+            if aktuelle_frage < gesamt_fragen-1:
                 st.session_state["k2_frage_idx"] += 1
                 st.session_state["k2_abgegeben"] = False
                 st.session_state["k2_feedback"] = None
                 st.session_state["k2_radio_key"] += 1
-        else:
-            if st.button("Weiter"):
+            else:
+                # Letzte Frage -> nächste Seite
                 st.session_state["k2_frage_idx"] = 0
                 st.session_state["k2_abgegeben"] = False
                 st.session_state["k2_feedback"] = None
                 st.session_state["k2_radio_key"] += 1
                 st.switch_page("pages/6_Kapitel 3.py")
+            st.experimental_rerun()  # Direkt zur nächsten Frage, kein doppelter Klick!
     else:
         st.error(frage["feedback_falsch"])
         if st.button("Wiederholen"):
             st.session_state["k2_abgegeben"] = False
             st.session_state["k2_feedback"] = None
             st.session_state["k2_radio_key"] += 1
-            st.info("🔄 Gleich geht's weiter! Drücke den Button Wiederholen erneut.")
-            st.info("🔄 Gleich geht's weiter! Drücke den Button Wiederholen erneut.")
+            st.experimental_rerun()  # Direkt Reset, kein doppelter Klick!
