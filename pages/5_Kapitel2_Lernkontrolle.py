@@ -49,8 +49,8 @@ fragen = [
             "Build – Measure – Learn"
         ],
         "richtig": 3,
-        "feedback_richtig": "GründerIn sagt: Genau! Build – Measure – Learn ist der Kern des Lean-Startup-Ansatzes.",
-        "feedback_falsch": "GründerIn sagt: Das stimmt so nicht. Probier es nochmals!"
+        "feedback_richtig": "Genau!",
+        "feedback_falsch": "Probier es nochmals!"
     },
     {
         "frage": "Was beschreibt den Lean-Ansatz im Sinne von Build – Measure – Learn (BML)?",
@@ -61,8 +61,8 @@ fragen = [
             "Einmal planen und dann konsequent umsetzen"
         ],
         "richtig": 2,
-        "feedback_richtig": "GründerIn sagt: Genau! Schrittweises Testen und Lernen ist entscheidend.",
-        "feedback_falsch": "GründerIn sagt: Nicht ganz. Denk an das Prinzip: Testen, messen, lernen!"
+        "feedback_richtig": "Genau!",
+        "feedback_falsch": "Probier es nochmals!"
     },
     {
         "frage": "Wofür steht MVP (Minimum Viable Product ) im Lean-Startup-Kontext?",
@@ -73,8 +73,8 @@ fragen = [
             "Es ist ein Prototyp, der nur intern verwendet wird, um technische Lösungen zu validieren."
         ],
         "richtig": 1,
-        "feedback_richtig": "GründerIn sagt: Richtig! Ein MVP ist die einfachste Version, um schnell zu testen.",
-        "feedback_falsch": "GründerIn sagt: Das ist nicht korrekt. Überleg nochmal, was ein MVP leisten soll."
+        "feedback_richtig": "Genau!",
+        "feedback_falsch": "Probier es nochmals!"
     },
     {
         "szenario": True,
@@ -87,8 +87,8 @@ fragen = [
             "Produkt stoppen"
         ],
         "richtig": 1,
-        "feedback_richtig": "✅ Richtig! NutzerInnen zu interviewen ist der beste Weg, um herauszufinden, warum das Produkt nicht genutzt wird. GründerIn sagt: Jetzt bekommen wir echte Einblicke, was fehlt oder nicht passt.",
-        "feedback_falsch": "❌ Das ist nicht die beste Wahl. GründerIn sagt: Es ist wichtig, zuerst zu verstehen, warum die NutzerInnen nicht aktiv sind – Interviews helfen uns dabei am meisten."
+        "feedback_richtig": "✅ Richtig! NutzerInnen zu interviewen ist der beste Weg, um herauszufinden, warum das Produkt nicht genutzt wird. Jetzt bekommen wir echte Einblicke, was fehlt oder nicht passt.",
+        "feedback_falsch": "❌ Das ist nicht die beste Wahl. Es ist wichtig, zuerst zu verstehen, warum die NutzerInnen nicht aktiv sind."
     }
 ]
 
