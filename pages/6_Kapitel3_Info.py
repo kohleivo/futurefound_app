@@ -9,14 +9,23 @@ if "kapitel1_visited" not in st.session_state:
 st.title("Startup Lean-Up! Vom Produkt zur validierten Problemhypothese")
 st.markdown('<div class="subtitle">Lernziel: Du lernst warum es entscheidend ist, zuerst das Problem zu verstehen – nicht das Produkt zu bauen.</div>', unsafe_allow_html=True)
 
-# Video zentriert anzeigen
-st.markdown('<div class="video-container">', unsafe_allow_html=True)
-with open("video 2.mp4", "rb") as video_file:
-    st.video(video_file.read())
-    st.markdown(
-    '<div style="font-size:0.95em; font-style:italic; color:#bfc9d1; text-align:left; margin-top:0.2em;">'
-    'Quelle: <a href="https://studyflix.de/wirtschaft-schueler/grunden-mit-dem-lean-startup-ansatz-546/video" style="color:#bfc9d1;" target="_blank">https://studyflix.de</a>'
-    '</div>',
+# --- YouTube-Video (nur von 0:00 bis 2:40 abspielbar) ---
+youtube_id = "dQw4w9WgXcQ"  # Ersetze durch die ID deines Videos!
+start_seconds = 0
+end_seconds = 160  # 2 Minuten 40 Sekunden
+
+embed_url = f"https://www.youtube.com/embed/watch?v=wXc-SWqBnKc?start=0&end=160&controls=1"
+
+st.markdown(
+    f"""
+    <div style="display: flex; justify-content: center;">
+        <iframe width="700" height="394"
+        src="{embed_url}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    """,
     unsafe_allow_html=True
 )
 st.markdown('</div>', unsafe_allow_html=True)
