@@ -30,7 +30,7 @@ st.markdown(
 
 # --- Video (25 Sekunden) ---
 st.markdown('<div style="display: flex; justify-content: center;">', unsafe_allow_html=True)
-with open("Video4.mp4", "rb") as video_file:  # Passe ggf. den Dateinamen an
+with open("video 4.mp4", "rb") as video_file:  # Passe ggf. den Dateinamen an
     st.video(video_file.read())
 st.markdown('</div>', unsafe_allow_html=True)
 
