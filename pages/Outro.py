@@ -13,7 +13,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="main-title">Outro: Mission erfüllt!</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">Mission erfüllt!</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Was du aus Lean Startup mitnimmst</div>', unsafe_allow_html=True)
 st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
 
