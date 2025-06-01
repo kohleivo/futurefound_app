@@ -71,10 +71,13 @@ st.markdown(
 )
 
 # --- Navigation ---
-col1, col2 = st.columns([1, 1])
+st.markdown("<div style='height: 32px;'></div>", unsafe_allow_html=True)  # vertikaler Abstand vor den Buttons
+
+col1, col2, col3 = st.columns([1, 6, 1])
+
 with col1:
     if st.button("Zurück"):
         st.switch_page("pages/3_Kapitelübersicht.py")
-with col2:
+with col3:
     if st.button("Weiter"):
         st.switch_page("pages/6_Kapitel2_Lernkontrolle.py")
