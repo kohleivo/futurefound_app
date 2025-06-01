@@ -31,4 +31,4 @@ with col1:
         st.switch_page("pages/7_Kapitel 3_LK.py")
 with col3:
     if st.button("Weiter"):
-        st.switch_page("pages/9_Kapitel 4_LK Teil1.py")
+        st.switch_page("pages/9_Kapitel 4_LK Teil 1.py")
