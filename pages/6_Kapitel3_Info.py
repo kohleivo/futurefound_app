@@ -35,6 +35,7 @@ st.markdown(
 )
 
 
+
 # --- YouTube-Video (nur von 0:00 bis 2:40 abspielbar) ---
 youtube_id = "dQw4w9WgXcQ"  # Ersetze durch die ID deines Videos!
 start_seconds = 0
@@ -55,52 +56,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 st.markdown('</div>', unsafe_allow_html=True)
-
-tiles = [
-    {"title": "Ein Startup ohne Geld", "info": "Lean hat nichts mit wenig Geld zu tun, sondern mit schnellem Lernen.", "icon": "💸"},
-    {"title": "Nur für Tech-Startups", "info": "Funktioniert branchenunabhängig.", "icon": "🏭"},
-    {"title": "Ein festes Rezept", "info": "Es geht um Experimente, nicht um einen starren Plan.", "icon": "🧪"},
-    {"title": "Nur was für Anfänger", "info": "Auch Konzerne nutzen es für neue Projekte", "icon": "🏢"}
-]
-
-st.markdown("""
-    <style>
-    .white-divider {
-        height: 2px;
-        width: 100%;
-        background: #fff;
-        margin: 28px 0 18px 0;
-        border: none;
-        border-radius: 2px;
-        box-shadow: 0 1px 4px #0001;
-    }
-    .tile-title {
-        font-size: 1.1em;
-        font-weight: bold;
-        margin-bottom: 0.2em;
-        color: #fff !important;
-    }
-    .tile-icon {
-        font-size: 1.6em;
-        margin-right: 0.5em;
-        vertical-align: middle;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-for idx, tile in enumerate(tiles):
-    if idx > 0:
-        st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
-    key = f"tile_{idx}_clicked"
-    st.markdown(
-        f'<span class="tile-icon">{tile["icon"]}</span>'
-        f'<span class="tile-title">{tile["title"]}</span>',
-        unsafe_allow_html=True
-    )
-    if st.button("Mehr erfahren", key=f"button_{idx}"):
-        st.session_state[key] = True
-    if st.session_state[key]:
-        st.info(tile["info"])
 
 # --- Vertikaler Abstand vor den Buttons ---
 st.markdown("<div style='height: 44px;'></div>", unsafe_allow_html=True)
