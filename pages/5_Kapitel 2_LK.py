@@ -134,7 +134,6 @@ if not st.session_state["k2_abgegeben"]:
             st.session_state["k2_feedback"] = "richtig"
         else:
             st.session_state["k2_feedback"] = "falsch"
-        st.experimental_rerun()  # Button verschwindet sofort, Feedback erscheint direkt
 
 if st.session_state["k2_abgegeben"]:
     if st.session_state["k2_feedback"] == "richtig":
@@ -152,11 +151,11 @@ if st.session_state["k2_abgegeben"]:
                 st.session_state["k2_feedback"] = None
                 st.session_state["k2_radio_key"] += 1
                 st.switch_page("pages/6_Kapitel 3.py")
-            st.experimental_rerun()  # Direkt zur nächsten Frage, kein doppelter Klick!
     else:
         st.error(frage["feedback_falsch"])
+        # Abstand vor dem Button
+        st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
         if st.button("Wiederholen"):
             st.session_state["k2_abgegeben"] = False
             st.session_state["k2_feedback"] = None
             st.session_state["k2_radio_key"] += 1
-            st.experimental_rerun()  # Direkt Reset, kein doppelter Klick!
