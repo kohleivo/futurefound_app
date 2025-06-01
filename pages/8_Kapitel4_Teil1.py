@@ -44,8 +44,7 @@ fragen = [
     {
 
         "szenario": True,
-        "frage": "Der Lean Startup-Ansatz basiert auf der Vorstellung, dass es wichtig ist, schnell zu handeln, Fehler zu machen und daraus zu lernen. Du kannst nicht immer alles von Anfang an perfekt planen – manchmal musst du die Dinge einfach ausprobieren und anhand der Ergebnisse entscheiden, wie du weitermachst.
-In einer dynamischen Start-up-Welt ist es entscheidend, nicht in langen Planungsphasen festzustecken, sondern schnell zu handeln, zu messen und zu lernen. Das bedeutet, du wirst Entscheidungen häufig auf Basis von Experimenten treffen.",
+        "frage": "Der Lean Startup-Ansatz basiert auf der Vorstellung, dass es wichtig ist, schnell zu handeln, Fehler zu machen und daraus zu lernen. Du kannst nicht immer alles von Anfang an perfekt planen – manchmal musst du die Dinge einfach ausprobieren und anhand der Ergebnisse entscheiden, wie du weitermachst. In einer dynamischen Start-up-Welt ist es entscheidend, nicht in langen Planungsphasen festzustecken, sondern schnell zu handeln, zu messen und zu lernen. Das bedeutet, du wirst Entscheidungen häufig auf Basis von Experimenten treffen.",
         "aufgabe": "Wie gehst du vor?",
         "antworten": [
             "Neues Feature entwickeln",
