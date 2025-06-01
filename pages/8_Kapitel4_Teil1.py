@@ -44,7 +44,8 @@ fragen = [
     {
 
         "szenario": True,
-        "frage": "Szenario: FutureFound hat ein MVP released – 100 Downloads, aber kaum aktive Nutzung.",
+        "frage": "Der Lean Startup-Ansatz basiert auf der Vorstellung, dass es wichtig ist, schnell zu handeln, Fehler zu machen und daraus zu lernen. Du kannst nicht immer alles von Anfang an perfekt planen – manchmal musst du die Dinge einfach ausprobieren und anhand der Ergebnisse entscheiden, wie du weitermachst.
+In einer dynamischen Start-up-Welt ist es entscheidend, nicht in langen Planungsphasen festzustecken, sondern schnell zu handeln, zu messen und zu lernen. Das bedeutet, du wirst Entscheidungen häufig auf Basis von Experimenten treffen.",
         "aufgabe": "Wie gehst du vor?",
         "antworten": [
             "Neues Feature entwickeln",
@@ -101,30 +102,6 @@ st.markdown('<div class="main-title">Kapitel 4: Lean Denken in Entscheidungen</d
 st.markdown('<div class="subtitle">Lernziel: Du kannst datenbasierte Entscheidungen treffen und weisst, für was Interviews, MVPs oder Analysen sinvoll sind.</div>', unsafe_allow_html=True)
 stepper(aktuelle_frage, gesamt_fragen)
 st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
-
-# --- Szenario-Box (neu hinzugefügt, fett für die letzte Zeile) ---
-st.markdown("""
-    <style>
-    .szenario-box {
-        background: #393e46;
-        color: #fff;
-        border-radius: 12px;
-        padding: 1.1em 1.4em;
-        margin: 1.3em 0 1.3em 0;
-        border-left: 6px solid #00adb5;
-        font-size: 1.05em;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-st.markdown(
-    '<div class="szenario-box">'
-    'Viele Startups scheitern nicht an der Technologie – sondern daran, dass sie ein Produkt für ein Problem entwickeln, das niemand hat.<br>'
-    'Lean Startup kehrt diese Logik um:</b><br>'
-    '<b><u>Nicht zuerst entwickeln – sondern zuerst verstehen.</b>'
-    '</div>',
-    unsafe_allow_html=True
-)
 
 # --- Frage oder Szenario anzeigen ---
 frage = fragen[aktuelle_frage]
