@@ -7,6 +7,7 @@ if "kapitel1_visited" not in st.session_state:
     st.session_state["kapitel1_visited"] = True
 
 st.title("Was ist eigentlich «Lean Startup»?")
+st.markdown('<div class="subtitle">Lernziel: Du verstehst, was Lean Startup bedeutet - und was es nicht ist.</div>', unsafe_allow_html=True)
 st.header("Du verstehst, was Lean Startup bedeutet – und was es nicht ist.")
 
 # Video zentriert anzeigen
