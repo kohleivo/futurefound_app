@@ -63,6 +63,7 @@ if st.session_state["ld2_abgegeben"]:
             st.switch_page("pages/3_Kapitelübersicht.py")
     else:
         st.markdown(f'<div class="feedback-error">{feedback[idx]}</div>', unsafe_allow_html=True)
+        st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
         if st.button("Wiederholen"):
             st.session_state["ld2_abgegeben"] = False
             st.session_state["ld2_radio_key"] += 1
