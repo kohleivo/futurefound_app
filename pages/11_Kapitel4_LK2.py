@@ -66,6 +66,7 @@ if st.session_state["ld2_abgegeben"]:
         if st.button("Wiederholen"):
             st.session_state["ld2_abgegeben"] = False
             st.session_state["ld2_radio_key"] += 1
+            st.info("Gleich geht's weiter! Drücken erneut den Button Wiederholen.")
 
 st.markdown("<div style='height: 44px;'></div>", unsafe_allow_html=True)
 col1, col2, col3 = st.columns([1, 6, 1], gap="small")
