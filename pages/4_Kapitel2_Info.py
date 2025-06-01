@@ -14,6 +14,8 @@ st.markdown("""
 
 st.markdown('<div class="main-title">Kapitel 2: Der Lean-Zyklus</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Build – Measure – Learn (BML)</div>', unsafe_allow_html=True)
+st.title("Was ist eigentlich «Lean Startup»?")
+st.header("Du verstehst, was Lean Startup bedeutet – und was es nicht ist.")
 st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
 
 st.markdown(
