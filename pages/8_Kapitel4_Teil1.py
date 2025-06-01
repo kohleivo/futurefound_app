@@ -94,8 +94,8 @@ aktuelle_frage = min(st.session_state["k2_frage_idx"], len(fragen)-1)
 gesamt_fragen = len(fragen)
 
 # --- Titel, Stepper, Divider ---
-st.markdown('<div class="main-title">Kapitel 3: Startup Lean-Up!</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">Vom Produkt zur validierten Problemhypothese</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">Kapitel 4: Lean Denken in Entscheidungen</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Lernziel: Du kannst datenbasierte Entscheidungen treffen und weisst, für was Interviews, MVPs oder Analysen sinvoll sind.</div>', unsafe_allow_html=True)
 stepper(aktuelle_frage, gesamt_fragen)
 st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
 
