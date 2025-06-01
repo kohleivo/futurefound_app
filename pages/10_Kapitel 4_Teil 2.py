@@ -34,7 +34,7 @@ st.markdown("<div style='height: 44px;'></div>", unsafe_allow_html=True)
 col1, col2, col3 = st.columns([1, 6, 1], gap="small")
 with col1:
     if st.button("Zurück"):
-        st.switch_page("pages/8_LeanDenken_Lernkontrolle1.py")
+        st.switch_page("pages/9_Kapitel 4_LK Teil 1.py")
 with col3:
     if st.button("Weiter"):
-        st.switch_page("pages/10_LeanDenken_Lernkontrolle2.py")
+        st.switch_page("pages/11_Kapitel 4_LK Teil 2.py")
