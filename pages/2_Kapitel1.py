@@ -8,7 +8,6 @@ if "kapitel1_visited" not in st.session_state:
 
 st.title("Was ist eigentlich «Lean Startup»?")
 st.markdown('<div class="subtitle">Lernziel: Du verstehst, was Lean Startup bedeutet - und was es nicht ist.</div>', unsafe_allow_html=True)
-st.header("Du verstehst, was Lean Startup bedeutet – und was es nicht ist.")
 
 # Video zentriert anzeigen
 st.markdown('<div class="video-container">', unsafe_allow_html=True)
