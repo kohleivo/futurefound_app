@@ -13,4 +13,4 @@ video_bytes = video_file.read()
 st.video(video_bytes)
 
 if st.button("Mission starten!"):
-    st.switch_page("pages/2_Mission.py")
+    st.switch_page("pages/1_Kapitel1_Info.py")
