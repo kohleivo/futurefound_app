@@ -1,3 +1,5 @@
+5_Kapitel 2_LK
+
 import streamlit as st
 
 # --- Stil und Schrittzähler ---
@@ -38,7 +40,7 @@ def stepper(current, total):
     html += '</div>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- Fragen und Feedback, inkl. Szenario als 4. Punkt ---
+# --- Fragen und Feedback, inkl. Szenario als 5. Punkt ---
 fragen = [
     {
         "frage": "Wofür steht die Abkürzung BML im Lean-Startup-Ansatz?",
@@ -102,9 +104,9 @@ if "k2_feedback" not in st.session_state:
 if "k2_radio_key" not in st.session_state:
     st.session_state["k2_radio_key"] = 0
 
+# --- Fehlerbehandlung für Index ---
 aktuelle_frage = min(st.session_state["k2_frage_idx"], len(fragen)-1)
 gesamt_fragen = len(fragen)
-frage = fragen[aktuelle_frage]
 
 # --- Titel, Stepper, Divider ---
 st.markdown('<div class="main-title">Kapitel 2: Der Lean-Zyklus</div>', unsafe_allow_html=True)
@@ -113,6 +115,8 @@ stepper(aktuelle_frage, gesamt_fragen)
 st.markdown('<div class="white-divider"></div>', unsafe_allow_html=True)
 
 # --- Frage oder Szenario anzeigen ---
+frage = fragen[aktuelle_frage]
+
 if "szenario" in frage and frage["szenario"]:
     st.markdown(f'<div class="szenario-box"><b>Szenario:</b> {frage["frage"]}</div>', unsafe_allow_html=True)
     st.markdown(f"<b>{frage['aufgabe']}</b>", unsafe_allow_html=True)
@@ -126,8 +130,7 @@ auswahl = st.radio(
     disabled=st.session_state["k2_abgegeben"]
 )
 
-# --- Navigation-Logik ---
-# 1. Abgabe-Button (nur sichtbar, wenn noch nicht abgegeben)
+# --- Abgabe-Button ---
 if not st.session_state["k2_abgegeben"]:
     if st.button("Abgabe"):
         st.session_state["k2_abgegeben"] = True
@@ -136,30 +139,27 @@ if not st.session_state["k2_abgegeben"]:
         else:
             st.session_state["k2_feedback"] = "falsch"
 
-# 2. Nach Abgabe: Feedback und "Weiter" oder "Wiederholen"
+# --- Feedback & Navigation ---
 if st.session_state["k2_abgegeben"]:
     if st.session_state["k2_feedback"] == "richtig":
         st.success(frage["feedback_richtig"])
-        weiter = st.button("Weiter")
-        if weiter:
-            if aktuelle_frage < gesamt_fragen-1:
+        if aktuelle_frage < gesamt_fragen-1:
+            if st.button("Weiter"):
                 st.session_state["k2_frage_idx"] += 1
-            else:
+                st.session_state["k2_abgegeben"] = False
+                st.session_state["k2_feedback"] = None
+                st.session_state["k2_radio_key"] += 1
+        else:
+            if st.button("Weiter"):
                 st.session_state["k2_frage_idx"] = 0
+                st.session_state["k2_abgegeben"] = False
+                st.session_state["k2_feedback"] = None
+                st.session_state["k2_radio_key"] += 1
                 st.switch_page("pages/6_Kapitel 3.py")
-            # Reset für nächste Frage
-            st.session_state["k2_abgegeben"] = False
-            st.session_state["k2_feedback"] = None
-            st.session_state["k2_radio_key"] += 1
-            st.experimental_set_query_params(dummy=str(st.session_state["k2_radio_key"]))  # Mini-Hack für sofortigen Render
-            st._rerun()
     else:
         st.error(frage["feedback_falsch"])
-        st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
-        wiederholen = st.button("Wiederholen")
-        if wiederholen:
+        if st.button("Wiederholen"):
             st.session_state["k2_abgegeben"] = False
             st.session_state["k2_feedback"] = None
             st.session_state["k2_radio_key"] += 1
-            st.experimental_set_query_params(dummy=str(st.session_state["k2_radio_key"]))  # Mini-Hack für sofortigen Render
-            st._rerun()
+            st.info("🔄 Gleich geht's weiter! Drücke den Button Wiederholen erneut.")
