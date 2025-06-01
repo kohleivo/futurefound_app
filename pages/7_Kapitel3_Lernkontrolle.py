@@ -48,7 +48,7 @@ fragen = [
             "Die Liste der wichtigsten Features",
             "Eine Marktprognose für die nächsten 6 Monate"
         ],
-        "richtig": 2,
+        "richtig": 1,
         "feedback_richtig": "Genau! Eine Problemhypothese beschreibt ein potenzielles Kundenproblem, das vor der Produktentwicklung validiert wird.",
         "feedback_falsch": "Probier es nochmals! Das ist eher eine technische- oder marktbezogene Aussage, keine Problemannahme"
     },
@@ -60,7 +60,7 @@ fragen = [
             "Weil viele Ideen am echten Bedarf vorbeigehen",
             "Weil Investoren das fordern"
         ],
-        "richtig": 3,
+        "richtig": 2,
         "feedback_richtig": "Genau! Der Lean-Startup-Ansatz minimiert das Risiko, indem er zuerst prüft, ob überhaupt ein Problem besteht.",
         "feedback_falsch": "Probier es nochmals! Das trifft nicht den Kern der Methode"
     },
@@ -72,7 +72,7 @@ fragen = [
             "Kundeninterviews führen",
             "Wettbewerbsanalyse durchführen"
         ],
-        "richtig": 3,
+        "richtig": 2,
         "feedback_richtig": "Genau! Kundeninterviews geben direkte Einblicke in den Alltag und die Bedürfnisse deiner Zielgruppe.",
         "feedback_falsch": "Probier es nochmals! Dies hilft an einer späteren Stelle, aber nicht in der Problemvalidierung."
     },
