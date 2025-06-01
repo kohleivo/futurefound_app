@@ -34,24 +34,6 @@ with open("video 4.mp4", "rb") as video_file:  # Passe ggf. den Dateinamen an
     st.video(video_file.read())
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- Szene & Voiceover ---
-st.markdown(
-    '<div class="outro-box">'
-    '<b>Szene:</b> Ein Büro, das von Energie und Tatendrang durchzogen ist. Der Bildschirm zeigt die GründerInnen von FutureFound, die sich mit ihrem Team freut.'
-    '</div>',
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    '<div class="voiceover">'
-    '<b>GründerIn (mit strahlendem Lächeln):</b><br>'
-    '„Unglaublich – dank dir haben wir das Modell neu aufgesetzt, unsere NutzerInnen wirklich verstanden und den Kredit bekommen! '
-    'Du hast unser Startup gerettet. Durch deine Hilfe konnte FutureFound den Lean Startup-Ansatz umsetzen, die richtigen Fragen stellen '
-    'und mit echten Daten schnell lernen. Jetzt haben sie das nötige Wachstumspotential, um weiter zu expandieren.“'
-    '</div>',
-    unsafe_allow_html=True
-)
-
 # --- Glückwunsch-Box ---
 st.markdown(
     '<div class="congrats-box">'
