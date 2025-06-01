@@ -147,6 +147,7 @@ if st.session_state["k2_abgegeben"]:
                 st.session_state["k2_abgegeben"] = False
                 st.session_state["k2_feedback"] = None
                 st.session_state["k2_radio_key"] += 1
+                st.info("Drücke nochmals Weiter.")
         else:
             if st.button("Weiter"):
                 st.session_state["k2_frage_idx"] = 0
