@@ -69,17 +69,22 @@ for idx, tile in enumerate(tiles):
     if st.session_state[key]:
         st.info(tile["info"])
 
-# Navigation: Session-State für diese Seite zurücksetzen beim Seitenwechsel
-col1, col2 = st.columns([1, 1])
+# --- Vertikaler Abstand vor den Buttons ---
+st.markdown("<div style='height: 44px;'></div>", unsafe_allow_html=True)
+
+# --- Navigation mit drei Spalten, Buttons links/rechts ---
+col1, col2, col3 = st.columns([1, 6, 1], gap="small")
+
 with col1:
     if st.button("Zurück", key="zurueck"):
         for idx in range(4):
             st.session_state[f"tile_{idx}_clicked"] = False
         st.session_state["kapitel1_visited"] = False
         st.switch_page("pages/2_Mission.py")
-with col2:
+with col3:
     if st.button("Weiter", key="weiter"):
         for idx in range(4):
             st.session_state[f"tile_{idx}_clicked"] = False
         st.session_state["kapitel1_visited"] = False
-        st.switch_page("pages/4_Kapitel1_Lernkontrolle.py")
+        st.switch_page("pages/3_Kapitel1_Lernkontrolle.py")
+
