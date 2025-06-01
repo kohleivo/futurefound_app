@@ -148,12 +148,12 @@ if st.session_state["k2_abgegeben"]:
                 st.session_state["k2_feedback"] = None
                 st.session_state["k2_radio_key"] += 1
         else:
-            if st.button("Zurück zu Kapitelübersicht"):
+            if st.button("Weiter"):
                 st.session_state["k2_frage_idx"] = 0
                 st.session_state["k2_abgegeben"] = False
                 st.session_state["k2_feedback"] = None
                 st.session_state["k2_radio_key"] += 1
-                st.switch_page("pages/6_Kapitelübersicht.py")
+                st.switch_page("pages/6_Kapitel3_Info.py")
     else:
         st.error(frage["feedback_falsch"])
         if st.button("Wiederholen"):
