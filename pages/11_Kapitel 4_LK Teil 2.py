@@ -52,6 +52,7 @@ if not st.session_state["ld2_abgegeben"]:
             st.session_state["ld2_feedback"] = "richtig"
         else:
             st.session_state["ld2_feedback"] = "falsch"
+        st.rerun()
 
 if st.session_state["ld2_abgegeben"]:
     idx = antworten.index(auswahl)
@@ -68,4 +69,4 @@ if st.session_state["ld2_abgegeben"]:
         if st.button("Wiederholen"):
             st.session_state["ld2_abgegeben"] = False
             st.session_state["ld2_radio_key"] += 1
-            st.info("🔄 Gleich geht's weiter! Drücke erneut den Button Wiederholen.")
+            st.rerun()

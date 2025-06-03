@@ -58,6 +58,7 @@ if not st.session_state["ld1_abgegeben"]:
             st.session_state["ld1_feedback"] = "richtig"
         else:
             st.session_state["ld1_feedback"] = "falsch"
+        st.rerun()
 
 if st.session_state["ld1_abgegeben"]:
     idx = antworten.index(auswahl)
@@ -66,12 +67,13 @@ if st.session_state["ld1_abgegeben"]:
         if st.button("Weiter"):
             st.session_state["ld1_abgegeben"] = False
             st.session_state["ld1_radio_key"] += 1
-            st.switch_page("pages/9_LeanDenken_Info2.py")
+            st.switch_page("pages/10_Kapitel 4_Teil 2.py")
     else:
         st.markdown(f'<div class="feedback-error">{feedback[idx]}</div>', unsafe_allow_html=True)
         if st.button("Wiederholen"):
             st.session_state["ld1_abgegeben"] = False
             st.session_state["ld1_radio_key"] += 1
+            st.rerun()
 
 st.markdown("<div style='height: 44px;'></div>", unsafe_allow_html=True)
 col1, col2, col3 = st.columns([1, 6, 1], gap="small")
